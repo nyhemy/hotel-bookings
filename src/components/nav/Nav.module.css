@@ -1,0 +1,29 @@
+.nav {
+    align-items: center;
+    background-color: rgba(212, 212, 212, 0.651);
+    box-shadow: 2px 1px 2px 1px rgba(0, 0, 0, 0.2);
+    color: #22752a;
+    display: flex;
+    height: 40px;
+    justify-content: space-around;
+    padding: 4px;
+    margin-bottom: 8px;
+}
+
+.active {
+    color: darkblue;
+}
+
+.link {
+    color: rgb(33, 155, 33);
+    font-weight: bold;
+    padding: 0 16px;
+    text-decoration: none;
+}
+
+.link:hover {
+    background-color: white;
+    border-radius: 4px;
+    color: rgb(33, 155, 33);
+    padding: 4px 16px;
+}
