@@ -22,7 +22,7 @@ const App = (props) => {
       <Nav loggedIn={loggedIn} isManager={isManager}/>
 
       <Switch>
-        <Route exact path="/" render={() => <Login loggedIn={loggedIn} isManager={isManager} />}/>
+        <Route exact path="/" render={() => <Login login={() => setLoggedIn(true)} loggedIn={loggedIn} isManager={isManager} />}/>
         <Route exact path="/reservations" component={Reservations} />
         <Route exact path="/room-types" component={Rooms} />
         <Route exact path="/logout" render={() => <Logout logout={() => setLoggedIn(false)} />} />
