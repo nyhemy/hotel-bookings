@@ -5,24 +5,23 @@ import styles from './Login.module.css';
 const Login = (props) => {
     const {login, loggedIn, isManager} = props;
 
-    const [email, setEmail] = useState({
-        value: "",
-    });
+    const axios = require('axios').default;
 
-    const [password, setPassword] = useState({
-        value: "",
-    });
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    const [isError, setIsError] = useState(false);
+    const [formValid, setFormValid] = useState(false);
+
+    const [errorMsg, setErrorMsg] = useState("");
     
     const handleChange = (event) => {
         event.preventDefault();
         switch (event.target.name) {
         case "email":
-            setEmail({ ...email, value: event.target.value });
+            setEmail(event.target.value);
             break;
         case "password":
-            setPassword({ ...password, value: event.target.value });
+            setPassword(event.target.value);
             break;
         default:
             break;
@@ -31,13 +30,35 @@ const Login = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        let formState = true;
+        setErrorMsg("");
 
         const validEmailRegex = 
           RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 
-          if (!validEmailRegex.test(email.value)) {
-            setIsError(true);
-          }
+        if (!validEmailRegex.test(email)) {
+            formState = false;
+            setErrorMsg("Invalid email or password");
+        }
+        
+        setFormValid(formState);
+    }
+
+    // throws 403
+    const postRequest = () => {
+        let pass = password;
+        let encryptedPass = btoa(pass);
+
+        axios.post('http://localhost:8080/login', {
+            email : email,
+            passord: encryptedPass
+        })
+        .then(response => {
+               console.log(response.data);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     return (
@@ -48,14 +69,14 @@ const Login = (props) => {
             </>}
 
             {!loggedIn && <>
-                <h1>form_placeholder</h1>
                 <form onSubmit={handleSubmit} noValidate>
-                    <div>{isError && "Invalid email or password"}</div>
+                    <div>{!formValid && errorMsg}</div>
                     <div><input type="email" name="email" placeholder="email" onChange={handleChange} /></div>
                     <div><input type="text" name="password" placeholder="password" onChange={handleChange} /></div>
-                    <button type="submit">Login</button>
+                    <button className={styles.button} type="submit">login</button>
                 </form>
-                <button className={styles.button} onClick={login}><Link to="/reservations" className={styles.buttonLink}>login_test</Link></button>
+                {/* <button className={styles.button} onClick={login}><Link to="/reservations" className={styles.buttonLink}>login_test</Link></button> */}
+                <div><button className={styles.button} onClick={postRequest}>post_test</button></div>
             </>}
         </div>
 
