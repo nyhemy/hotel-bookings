@@ -28,25 +28,6 @@ const Login = (props) => {
         }      
     }
 
-    // const postRequest = () => {
-    //     axios.post('http://localhost:8080/login', {
-    //         email : email,
-    //         password: password
-    //     })
-    //     .then(response => {
-    //         let data = response.data;
-    //         console.log(response.data);
-    //         sessionStorage.setItem("token", data);
-    //         let storedToken = sessionStorage.getItem("token");
-    //         console.log(storedToken);
-    //         // let atobTest = atob(test);
-    //         // console.log(atobTest);
-    //     })
-    //     .catch(error => {
-    //         setErrorMsg("Invalid email or password");
-    //     })
-    // }
-
     const handleSubmit = (event) => {
         event.preventDefault();
         let formState = true;
@@ -72,6 +53,7 @@ const Login = (props) => {
             console.log(storedToken);
             // let atobTest = atob(test);
             // console.log(atobTest);
+            props.login();
         })
         .catch(error => {
             formState = false;

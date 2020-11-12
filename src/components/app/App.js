@@ -16,12 +16,12 @@ const App = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isManager, setIsManager] = useState(false);
 
-  useEffect(() => {
-    console.log("token: " + sessionStorage.getItem("token"));
-    if (sessionStorage.getItem("token") && !loggedIn) {
-      setLoggedIn(true);
-    }
-  });
+  // useEffect(() => {
+  //   console.log("token: " + sessionStorage.getItem("token"));
+  //   if (sessionStorage.getItem("token") && !loggedIn) {
+  //     setLoggedIn(true);
+  //   }
+  // }, [loggedIn]);
   
   return (
     <div>
