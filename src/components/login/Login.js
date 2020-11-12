@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styles from './Login.module.css';
 
 const Login = (props) => {
@@ -35,7 +35,7 @@ const Login = (props) => {
         setErrorMsg("");
 
         const validEmailRegex = 
-          RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+          RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
 
         if (!validEmailRegex.test(email)) {
             formState = false;
@@ -48,12 +48,17 @@ const Login = (props) => {
         })
         .then(response => {
             let token = response.data.token;
-            console.log(response.data);
+            // console.log(token);
             sessionStorage.setItem("token", token);
             let storedToken = sessionStorage.getItem("token");
-            console.log("sessionStorage: " + storedToken);
-            let atobTest = JSON.parse(atob(token.split('.')[1]));
-            console.log(atobTest);
+            // console.log("sessionStorage: " + storedToken);
+            let decodedToken = JSON.parse(atob(token.split('.')[1]));
+            // console.log(atobTest);
+            let role = decodedToken.roles;
+            console.log(role);
+            if (role === "manager") {
+                isManager(true);
+            }
             login(true);
             history.push("/reservations");
         })
@@ -77,7 +82,7 @@ const Login = (props) => {
                 <form onSubmit={handleSubmit} noValidate>
                     <div>{!formValid && errorMsg}</div>
                     <div><input type="email" name="email" placeholder="email" onChange={handleChange} /></div>
-                    <div><input type="text" name="password" placeholder="password" onChange={handleChange} /></div>
+                    <div><input type="password" name="password" placeholder="password" onChange={handleChange} /></div>
                     <button className={styles.button} type="submit">login</button>
                 </form>
                 {/* <button className={styles.button} onClick={login}><Link to="/reservations" className={styles.buttonLink}>login_test</Link></button> */}
