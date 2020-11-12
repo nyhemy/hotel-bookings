@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import styles from './App.module.css';
 import Nav from '../nav/Nav';
 import Login from '../login/Login';
 import Logout from '../logout/Logout';
@@ -28,7 +27,6 @@ const App = (props) => {
   }, [loggedIn]);
   
   return (
-    <div>
     <Router>
       <Nav loggedIn={loggedIn} isManager={isManager}/>
 
@@ -41,7 +39,6 @@ const App = (props) => {
       </Switch>
 
     </Router>
-    </div>
   );
 }
 

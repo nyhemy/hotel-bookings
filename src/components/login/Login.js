@@ -52,7 +52,7 @@ const Login = (props) => {
             // let storedToken = sessionStorage.getItem("token");
             // console.log("sessionStorage: " + storedToken);
             let decodedToken = JSON.parse(atob(token.split('.')[1]));
-            // console.log(atobTest);
+            console.log(decodedToken);
             let role = decodedToken.roles;
             console.log(role);
             if (role === "manager") {
@@ -74,7 +74,7 @@ const Login = (props) => {
     return (
         <div className={styles.center}>
             {loggedIn && <>
-                <h1>You are already logged in</h1>
+                <h3>{"Welcome to Hotel Bookings " + JSON.parse(atob(sessionStorage.getItem("token").split('.')[1])).sub}</h3>
             </>}
 
             {!loggedIn && <>
