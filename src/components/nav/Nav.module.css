@@ -10,10 +10,6 @@
     margin-bottom: 8px;
 }
 
-.active {
-    color: darkblue;
-}
-
 .link {
     color: rgb(33, 155, 33);
     font-weight: bold;
@@ -21,9 +17,18 @@
     text-decoration: none;
 }
 
+.active {
+    background-color: rgba(255, 255, 255, 0.582);
+    border-radius: 4px;
+    color: rgb(33, 155, 33);
+    padding: 4px 16px;
+    font-weight: bold;
+}
+
 .link:hover {
     background-color: white;
     border-radius: 4px;
     color: rgb(33, 155, 33);
     padding: 4px 16px;
+    text-decoration: none;
 }

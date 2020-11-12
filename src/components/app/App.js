@@ -6,6 +6,7 @@ import Login from '../login/Login';
 import Logout from '../logout/Logout';
 import Reservations from '../reservations/Reservations';
 import Rooms from '../rooms/Rooms';
+import NotFound from '../notFound/NotFound';
 
 /**
  * 
@@ -20,6 +21,10 @@ const App = (props) => {
     if (sessionStorage.getItem("token") && !loggedIn) {
       setLoggedIn(true);
     }
+
+    if (sessionStorage.getItem("role") === "manager" && !loggedIn) {
+      setIsManager(true);
+    }
   }, [loggedIn]);
   
   return (
@@ -32,6 +37,7 @@ const App = (props) => {
         <Route exact path="/reservations" component={Reservations} />
         <Route exact path="/room-types" component={Rooms} />
         <Route exact path="/logout" render={() => <Logout logout={(bool) => setLoggedIn(bool)} />} />
+        <Route path="*" component={NotFound} />
       </Switch>
 
     </Router>

@@ -10,11 +10,11 @@ const Nav = (props) => {
             <h3>Hotel Bookings</h3>
 
             {loggedIn && <>
-                <NavLink to="/reservations" className={styles.link} activeClassName={styles.active}>
+                <NavLink exact to="/reservations" className={styles.link} activeClassName={styles.active}>
                     Reservations
                 </NavLink>
 
-                {isManager && <NavLink to="/room-types" className={styles.link} activeClassName={styles.active}>
+                {isManager && <NavLink exact to="/room-types" className={styles.link} activeClassName={styles.active}>
                     Rooms
                 </NavLink>}
 
