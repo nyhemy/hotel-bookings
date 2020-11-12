@@ -23,12 +23,17 @@
     font-weight: bold;
     text-decoration: none;
     margin-top: 10px;
+    outline: none;
   }
 
   .button:hover {
     background-color: white;
     border-radius: 4px;
     color: rgb(33, 155, 33);
+  }
+
+  .button:active {
+    background-color: rgba(167, 167, 167, 0.651);
   }
 
   .center {
