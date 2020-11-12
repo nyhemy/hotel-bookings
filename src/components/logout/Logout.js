@@ -2,8 +2,9 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 const Logout = (props) => {
+    const {logout} = props;
     sessionStorage.clear();
-    props.logout();
+    logout(false);
     return <Redirect to="/" />;
 }
 

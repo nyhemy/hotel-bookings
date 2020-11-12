@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import styles from './Login.module.css';
 
 const Login = (props) => {
     const {login, loggedIn, isManager} = props;
 
     const axios = require('axios').default;
+    const history = useHistory();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -46,14 +47,15 @@ const Login = (props) => {
             password: password
         })
         .then(response => {
-            let data = response.data;
+            let token = response.data.token;
             console.log(response.data);
-            sessionStorage.setItem("token", data);
+            sessionStorage.setItem("token", token);
             let storedToken = sessionStorage.getItem("token");
-            console.log(storedToken);
-            // let atobTest = atob(test);
-            // console.log(atobTest);
-            props.login();
+            console.log("sessionStorage: " + storedToken);
+            let atobTest = JSON.parse(atob(token.split('.')[1]));
+            console.log(atobTest);
+            login(true);
+            history.push("/reservations");
         })
         .catch(error => {
             formState = false;

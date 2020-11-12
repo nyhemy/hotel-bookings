@@ -16,12 +16,11 @@ const App = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isManager, setIsManager] = useState(false);
 
-  // useEffect(() => {
-  //   console.log("token: " + sessionStorage.getItem("token"));
-  //   if (sessionStorage.getItem("token") && !loggedIn) {
-  //     setLoggedIn(true);
-  //   }
-  // }, [loggedIn]);
+  useEffect(() => {
+    if (sessionStorage.getItem("token") && !loggedIn) {
+      setLoggedIn(true);
+    }
+  }, [loggedIn]);
   
   return (
     <div>
@@ -29,10 +28,10 @@ const App = (props) => {
       <Nav loggedIn={loggedIn} isManager={isManager}/>
 
       <Switch>
-        <Route exact path="/" render={() => <Login login={() => setLoggedIn(true)} loggedIn={loggedIn} isManager={isManager} />}/>
+        <Route exact path="/" render={() => <Login login={(bool) => setLoggedIn(bool)} loggedIn={loggedIn} isManager={isManager} />}/>
         <Route exact path="/reservations" component={Reservations} />
         <Route exact path="/room-types" component={Rooms} />
-        <Route exact path="/logout" render={() => <Logout logout={() => setLoggedIn(false)} />} />
+        <Route exact path="/logout" render={() => <Logout logout={(bool) => setLoggedIn(bool)} />} />
       </Switch>
 
     </Router>
