@@ -47,17 +47,16 @@ const Login = (props) => {
     // throws 403
     const postRequest = () => {
         let pass = password;
-        let encryptedPass = btoa(pass);
 
         axios.post('http://localhost:8080/login', {
             email : email,
-            passord: encryptedPass
+            password: password
         })
         .then(response => {
                console.log(response.data);
         })
         .catch(error => {
-            console.log(error);
+            setErrorMsg("error");
         })
     }
 
