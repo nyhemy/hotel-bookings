@@ -28,6 +28,25 @@ const Login = (props) => {
         }      
     }
 
+    // const postRequest = () => {
+    //     axios.post('http://localhost:8080/login', {
+    //         email : email,
+    //         password: password
+    //     })
+    //     .then(response => {
+    //         let data = response.data;
+    //         console.log(response.data);
+    //         sessionStorage.setItem("token", data);
+    //         let storedToken = sessionStorage.getItem("token");
+    //         console.log(storedToken);
+    //         // let atobTest = atob(test);
+    //         // console.log(atobTest);
+    //     })
+    //     .catch(error => {
+    //         setErrorMsg("Invalid email or password");
+    //     })
+    // }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         let formState = true;
@@ -40,25 +59,28 @@ const Login = (props) => {
             formState = false;
             setErrorMsg("Invalid email or password");
         }
-        
-        setFormValid(formState);
-    }
-
-    // throws 403
-    const postRequest = () => {
-        let pass = password;
 
         axios.post('http://localhost:8080/login', {
             email : email,
             password: password
         })
         .then(response => {
-               console.log(response.data);
+            let data = response.data;
+            console.log(response.data);
+            sessionStorage.setItem("token", data);
+            let storedToken = sessionStorage.getItem("token");
+            console.log(storedToken);
+            // let atobTest = atob(test);
+            // console.log(atobTest);
         })
         .catch(error => {
-            setErrorMsg("error");
+            formState = false;
+            setErrorMsg("Invalid email or password");
         })
+        
+        setFormValid(formState);
     }
+
 
     return (
         <div>
@@ -75,7 +97,7 @@ const Login = (props) => {
                     <button className={styles.button} type="submit">login</button>
                 </form>
                 {/* <button className={styles.button} onClick={login}><Link to="/reservations" className={styles.buttonLink}>login_test</Link></button> */}
-                <div><button className={styles.button} onClick={postRequest}>post_test</button></div>
+                {/* <div><button className={styles.button} onClick={postRequest}>post_test</button></div> */}
             </>}
         </div>
 

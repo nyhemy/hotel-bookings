@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styles from './App.module.css';
 import Nav from '../nav/Nav';
@@ -15,6 +15,13 @@ const App = (props) => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [isManager, setIsManager] = useState(false);
+
+  useEffect(() => {
+    console.log("token: " + sessionStorage.getItem("token"));
+    if (sessionStorage.getItem("token") && !loggedIn) {
+      setLoggedIn(true);
+    }
+  });
   
   return (
     <div>
