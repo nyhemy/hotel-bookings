@@ -79,7 +79,7 @@ const Login = (props) => {
 
             {!loggedIn && <>
                 <form onSubmit={handleSubmit} noValidate>
-                    <div>{!formValid && errorMsg}</div>
+                    <div className={styles.error}>{!formValid && errorMsg}</div>
                     <div><input type="email" name="email" placeholder="email" onChange={handleChange} /></div>
                     <div><input type="password" name="password" placeholder="password" onChange={handleChange} /></div>
                     <button className={styles.button} type="submit">login</button>

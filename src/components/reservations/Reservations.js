@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import styles from './Reservations.module.css';
 
 const Reservations = () => {
 
@@ -12,7 +13,7 @@ const Reservations = () => {
     });
 
     return (
-        <div>
+        <div className={styles.center}>
             reservation_placeholder
         </div>
     );
