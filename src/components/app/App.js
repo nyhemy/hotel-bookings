@@ -24,7 +24,7 @@ const App = (props) => {
     if (sessionStorage.getItem("role") === "manager" && !loggedIn) {
       setIsManager(true);
     }
-  }, [loggedIn]);
+  }, [loggedIn, isManager]);
   
   return (
     <Router>
