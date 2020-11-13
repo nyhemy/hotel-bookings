@@ -6,11 +6,10 @@ const Reservation = (props) => {
 
     return (
         <div className={styles.card}>
-            <div>{checkInDate}</div>
-            <div>{guestEmail}</div>
-            <div>{numberOfNights}</div>
-            <div>{roomTypeId}</div>
-            <div>{user}</div>
+            <div>CheckIn date: {checkInDate}</div>
+            <div>Guest: {guestEmail}</div>
+            <div>Number of nights: {numberOfNights}</div>
+            <div>Room type: {roomTypeId}</div>
         </div>
     );
 }
