@@ -65,7 +65,7 @@ const Login = (props) => {
         .catch(error => {
             formState = false;
             setErrorMsg("Invalid email or password");
-        })
+        });
         
         setFormValid(formState);
     }
