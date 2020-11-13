@@ -1,0 +1,11 @@
+.card {
+    text-align: center;
+    box-sizing: content-box;
+    width: 200px;
+    margin: 1%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.603), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+    float: left;
+}

@@ -21,8 +21,10 @@ const App = (props) => {
       setLoggedIn(true);
     }
 
-    if (sessionStorage.getItem("role") === "manager" && !loggedIn) {
+    if (sessionStorage.getItem("role") === "manager" && loggedIn) {
       setIsManager(true);
+    } else {
+      setIsManager(false);
     }
   }, [loggedIn, isManager]);
   

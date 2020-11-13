@@ -8,7 +8,7 @@ const Reservations = () => {
     const axios = require('axios').default;
     const history = useHistory();
 
-    const [responseData, setResponseData] = useState([]);
+    // const [responseData, setResponseData] = useState([]);
     const [reservations, setReservations] = useState([]);
     
     useEffect(() => {
@@ -29,9 +29,9 @@ const Reservations = () => {
         })
         .then(response => {
             // setReservations(response.data);
-            const responseData = response.data;
-            console.log(responseData);
-            setResponseData(responseData);
+            const reservations = response.data;
+            console.log(reservations);
+            setReservations(reservations);
         })
         .catch(error => {
             console.log(error);
@@ -40,14 +40,14 @@ const Reservations = () => {
 
     // set response.data into a state, then use that to build a series of Reservation component objects and put them into their own state array
     // then display said array
-    const SetReservationsFromData = () => {
-        setReservations([]);
-        for (let data of responseData) {
-            // use Reservation component to build Reservation objects
-            let res = <Reservation checkInDate={data.checkInDate} guestEmail={data.guestEmail} id={data.id} numberOfNights={data.numberOfNights} roomTypeId={data.roomTypeId} user={data.user} />
-            setReservations(prevRes => [...prevRes, res]);
-        }
-    }
+    // const SetReservationsFromData = () => {
+    //     setReservations([]);
+    //     // for (let data of responseData) {
+    //     //     // use Reservation component to build Reservation objects
+    //     //     let res = <Reservation checkInDate={data.checkInDate} guestEmail={data.guestEmail} id={data.id} numberOfNights={data.numberOfNights} roomTypeId={data.roomTypeId} user={data.user} />
+    //     //     setReservations(prevRes => [...prevRes, res]);
+    //     // }
+    // }
 
     const DisplayReservations = () => {
         console.log("reservations:")
@@ -60,9 +60,21 @@ const Reservations = () => {
         <div className={styles.center}>
             <h2>Reservations</h2>
             <button onClick={GetReservations}>get_reservations</button>
-            <button onClick={SetReservationsFromData}>set_res_from_data</button>
-            <button onClick={DisplayReservations}>display_reservations</button>
-            <div>{reservations}</div>
+            {/* <button onClick={SetReservationsFromData}>set_res_from_data</button> */}
+            <button onClick={DisplayReservations}>display_reservations_console</button>
+            <div>
+                {reservations.map(
+                    (data, index) => <Reservation
+                        checkInDate={data.checkInDate}
+                        guestEmail={data.guestEmail}
+                        id={data.id}
+                        numberOfNights={data.numberOfNights}
+                        roomTypeId={data.roomTypeId}
+                        user={data.user}
+                        key={index}
+                    />
+                )}
+            </div>
         </div>
     );
 }
