@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Reservation.module.css';
-import RoomTypes from '../roomTypes/RoomTypes';
 
 const Reservation = (props) => {
     const {checkInDate, guestEmail, id, numberOfNights, roomTypeId, user} = props;
@@ -30,10 +29,6 @@ const Reservation = (props) => {
         });
     }
 
-    const test = () => {
-        console.log(rooms);
-    }
-
     const getRoomType = (num) => {
         let r = rooms;
         for (let i = 0; i <= r.length-1; i++) {
@@ -47,7 +42,6 @@ const Reservation = (props) => {
         <div className={styles.card}>
             <div>Guest: {guestEmail}</div>
             <div>Room type: {getRoomType(roomTypeId)}</div>
-            {/* <div>Room type: test</div> */}
             <div>CheckIn date: {checkInDate}</div>
             <div>Number of nights: {numberOfNights}</div>
         </div>
