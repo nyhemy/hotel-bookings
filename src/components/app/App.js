@@ -4,7 +4,6 @@ import Nav from '../nav/Nav';
 import Login from '../login/Login';
 import Logout from '../logout/Logout';
 import Reservations from '../reservations/Reservations';
-import Rooms from '../rooms/Rooms';
 import NotFound from '../notFound/NotFound';
 import RoomTypes from '../roomTypes/RoomTypes';
 

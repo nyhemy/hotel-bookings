@@ -1,17 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Reservation.module.css';
-
+import RoomTypes from '../roomTypes/RoomTypes';
 const Reservation = (props) => {
     const {checkInDate, guestEmail, id, numberOfNights, roomTypeId, user} = props;
+    const axios = require('axios').default;
 
-    const roomType = (num) => {
-        
+    const [rooms, setRooms] = useState([]);
+
+    useEffect (() => {
+    
+            // getRoomTypes();
+        }, []);
+
+    // const getRoomTypes = () => {
+    //     axios.get('http://localhost:8080/room-types', {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'mode': 'cors',
+    //             'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+    //         }
+    //     })
+    //     .then(response => {
+    //         const res = response.data;
+    //         console.log(res);
+    //         setRooms(res);
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //     });
+    // }
+
+    const getRoomType = (num) => {
+        return rooms[num];
     }
 
     return (
         <div className={styles.card}>
             <div>Guest: {guestEmail}</div>
-            <div>Room type: {roomTypeId}</div>
+            <div>Room type: {getRoomType(roomTypeId)}</div>
             <div>CheckIn date: {checkInDate}</div>
             <div>Number of nights: {numberOfNights}</div>
         </div>

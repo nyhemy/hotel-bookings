@@ -16,7 +16,7 @@ const RoomTypes = () => {
         }
 
         getRoomTypes();
-    }, [])
+    }, []);
 
     const getRoomTypes = () => {
         axios.get('http://localhost:8080/room-types', {
