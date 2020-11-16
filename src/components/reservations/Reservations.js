@@ -29,7 +29,6 @@ const Reservations = () => {
         })
         .then(response => {
             const res = response.data;
-            console.log(res);
             setReservations(res);
         })
         .catch(error => {
@@ -37,29 +36,28 @@ const Reservations = () => {
         });
     }
 
-    const DisplayReservations = () => {
-        console.log("reservations:")
-        for (let res of reservations) {
-            console.log(res);
-        }
-    }
+    // const DisplayReservations = () => {
+    //     console.log("reservations:")
+    //     for (let res of reservations) {
+    //         console.log(res);
+    //     }
+    // }
 
     return (
         <div className={styles.center}>
             <h2>Reservations</h2>
             {/* <button onClick={DisplayReservations}>display_reservations_console</button> */}
             <div className={styles.row}>
-                {reservations.map(
-                    (data, index) => <div className={styles.column}><Reservation
+                {reservations ? reservations.map(
+                    (data, index) => <div className={styles.column} key={index}><Reservation
                         checkInDate={data.checkInDate}
                         guestEmail={data.guestEmail}
                         id={data.id}
                         numberOfNights={data.numberOfNights}
                         roomTypeId={data.roomTypeId}
                         user={data.user}
-                        key={index}
                     /></div>
-                )}
+                ) : "Oops something went wrong"}
             </div>
         </div>
     );

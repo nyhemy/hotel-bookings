@@ -41,16 +41,15 @@ const RoomTypes = () => {
             <h2>Rooms</h2>
             {/* <button onClick={DisplayReservations}>display_reservations_console</button> */}
             <div className={styles.row}>
-                {rooms.map(
-                    (data, index) => <div className={styles.column}><Room
+                {rooms ? rooms.map(
+                    (data, index) => <div className={styles.column} key={index}><Room
                         id={data.id}
                         name={data.name}
                         description={data.description}
                         rate={data.rate}
                         isActive={data.active}
-                        key={index}
                     /></div>
-                )}
+                ) : "Oops something went wrong"}
             </div>
         </div>
     );

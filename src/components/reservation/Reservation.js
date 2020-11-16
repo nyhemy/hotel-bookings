@@ -23,7 +23,6 @@ const Reservation = (props) => {
         })
         .then(response => {
             const res = response.data;
-            console.log(res);
             setRooms(res);
         })
         .catch(error => {
