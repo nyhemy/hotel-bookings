@@ -15,11 +15,11 @@ const Reservations = () => {
             history.push("/");
         }
 
-        GetReservations();
+        getReservations();
     }, []);
 
     // fetches reservations from API and sets them to reservations state
-    const GetReservations = () => {
+    const getReservations = () => {
         axios.get('http://localhost:8080/reservations', {
             headers: {
                 'Content-Type': 'application/json',

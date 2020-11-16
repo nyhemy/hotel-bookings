@@ -17,14 +17,14 @@ const Login = (props) => {
     const handleChange = (event) => {
         event.preventDefault();
         switch (event.target.name) {
-        case "email":
-            setEmail(event.target.value);
-            break;
-        case "password":
-            setPassword(event.target.value);
-            break;
-        default:
-            break;
+            case "email":
+                setEmail(event.target.value);
+                break;
+            case "password":
+                setPassword(event.target.value);
+                break;
+            default:
+                break;
         }      
     }
 
