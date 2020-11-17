@@ -28,8 +28,7 @@ const Reservations = () => {
             }
         })
         .then(response => {
-            const res = response.data;
-            setReservations(res);
+            setReservations(response.data);
         })
         .catch(error => {
             console.log(error);

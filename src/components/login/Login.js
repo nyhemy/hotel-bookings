@@ -31,7 +31,6 @@ const Login = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         let formState = true;
-        // setErrorMsg("");
 
         const validEmailRegex = 
           RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
@@ -47,14 +46,10 @@ const Login = (props) => {
         })
         .then(response => {
             let token = response.data.token;
-            // console.log(token);
             sessionStorage.setItem("token", token);
-            // let storedToken = sessionStorage.getItem("token");
-            // console.log("sessionStorage: " + storedToken);
             let decodedToken = JSON.parse(atob(token.split('.')[1]));
-            console.log(decodedToken);
             let role = decodedToken.roles;
-            console.log(role);
+
             if (role === "manager") {
                 isManager(true);
                 sessionStorage.setItem("role", role);

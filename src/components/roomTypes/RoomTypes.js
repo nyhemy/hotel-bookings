@@ -27,8 +27,7 @@ const RoomTypes = () => {
             }
         })
         .then(response => {
-            const res = response.data;
-            setRooms(res);
+            setRooms(response.data);
         })
         .catch(error => {
             console.log(error);
