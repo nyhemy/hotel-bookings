@@ -6,6 +6,8 @@ import Logout from '../logout/Logout';
 import Reservations from '../reservations/Reservations';
 import NotFound from '../notFound/NotFound';
 import RoomTypes from '../roomTypes/RoomTypes';
+import ReservationCreate from '../reservationCreate/ReservationCreate';
+import RoomCreate from '../roomCreate/RoomCreate';
 
 /**
  * 
@@ -35,7 +37,9 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" render={() => <Login login={(bool) => setLoggedIn(bool)} loggedIn={loggedIn} isManager={(bool) => setIsManager(bool)} />}/>
         <Route exact path="/reservations" component={Reservations} />
+        <Route exact path="/reservations/create" component={ReservationCreate} />
         <Route exact path="/room-types" component={RoomTypes} />
+        <Route exact path="/room-types/create" component={RoomCreate} />
         <Route exact path="/logout" render={() => <Logout logout={(bool) => setLoggedIn(bool)} />} />
         <Route path="*" component={NotFound} />
       </Switch>
