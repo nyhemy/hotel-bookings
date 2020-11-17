@@ -38,12 +38,24 @@ const Reservation = (props) => {
         }
     }
 
+    const getStayCost = (num) => {
+        let r = rooms;
+        for (let i = 0; i <= r.length-1; i++) {
+            if (r[i].id === num) {
+                let rate = r[i].rate;
+                let cost = rate * numberOfNights
+                return cost;
+            }
+        }
+    }
+
     return (
         <div className={styles.card}>
             <div>Guest: {guestEmail}</div>
             <div>Room type: {getRoomType(roomTypeId)}</div>
             <div>CheckIn date: {checkInDate}</div>
             <div>Number of nights: {numberOfNights}</div>
+            <div>Stay Cost: {getStayCost(roomTypeId)}</div>
         </div>
     );
 }
