@@ -43,8 +43,7 @@ const Reservation = (props) => {
         for (let i = 0; i <= r.length-1; i++) {
             if (r[i].id === num) {
                 let rate = r[i].rate;
-                let cost = rate * numberOfNights
-                return cost;
+                return  rate * numberOfNights;
             }
         }
     }
@@ -56,6 +55,7 @@ const Reservation = (props) => {
             <div>CheckIn date: {checkInDate}</div>
             <div>Number of nights: {numberOfNights}</div>
             <div>Stay Cost: {getStayCost(roomTypeId)}</div>
+            <div><button>edit</button><button>delete</button></div>
         </div>
     );
 }

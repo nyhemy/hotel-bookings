@@ -38,6 +38,7 @@ const RoomTypes = () => {
     return (
         <div className={styles.center}>
             <h2>Rooms</h2>
+            <button>create</button>
             <div className={styles.row}>
                 {rooms ? rooms.map(
                     (data, index) => <div className={styles.column} key={index}><Room

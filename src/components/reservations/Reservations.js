@@ -39,6 +39,7 @@ const Reservations = () => {
     return (
         <div className={styles.center}>
             <h2>Reservations</h2>
+            <button>create</button>
             <div className={styles.row}>
                 {reservations ? reservations.map(
                     (data, index) => <div className={styles.column} key={index}><Reservation

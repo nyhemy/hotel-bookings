@@ -10,6 +10,7 @@ const Room = (props) => {
             <div>Description: {description}</div>
             <div>Rate: {rate}</div>
             <div>{isActive ? "Active" : "Inactive"}</div>
+            <div><button>edit</button></div>
         </div>
     );
 }
