@@ -36,17 +36,9 @@ const Reservations = () => {
         });
     }
 
-    // const DisplayReservations = () => {
-    //     console.log("reservations:")
-    //     for (let res of reservations) {
-    //         console.log(res);
-    //     }
-    // }
-
     return (
         <div className={styles.center}>
             <h2>Reservations</h2>
-            {/* <button onClick={DisplayReservations}>display_reservations_console</button> */}
             <div className={styles.row}>
                 {reservations ? reservations.map(
                     (data, index) => <div className={styles.column} key={index}><Reservation
