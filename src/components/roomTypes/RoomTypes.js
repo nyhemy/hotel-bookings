@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styles from './RoomTypes.module.css';
 import Room from '../room/Room';
 import Button from '../button/Button';
+import loadImg from '../ajax-loader.gif';
 
 const RoomTypes = () => {
 
@@ -10,6 +11,8 @@ const RoomTypes = () => {
     const history = useHistory();
 
     const [rooms, setRooms] = useState([]);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect (() => {
         if (!sessionStorage.getItem("token")) {
@@ -20,6 +23,8 @@ const RoomTypes = () => {
     }, []);
 
     const getRoomTypes = () => {
+        setError(false);
+        setLoading(true);
         axios.get('http://localhost:8080/room-types', {
             headers: {
                 'Content-Type': 'application/json',
@@ -28,10 +33,12 @@ const RoomTypes = () => {
             }
         })
         .then(response => {
+            setLoading(false);
             setRooms(response.data);
         })
         .catch(error => {
-            console.log(error);
+            setLoading(false);
+            setError(true);
         });
     }
 
@@ -42,17 +49,24 @@ const RoomTypes = () => {
     return (
         <div className={styles.center}>
             <h2>Rooms</h2>
-            <Button onClick={createRoom}>Create</Button>
+            {error && <h3 className={styles.error}>Oops something went wrong</h3>}
             <div className={styles.row}>
-                {rooms ? rooms.map(
-                    (data, index) => <div className={styles.column} key={index}><Room
-                        id={data.id}
-                        name={data.name}
-                        description={data.description}
-                        rate={data.rate}
-                        isActive={data.active}
-                    /></div>
-                ) : "Oops something went wrong"}
+                {loading ?
+                    <img src={loadImg} alt="loading..." />
+                :
+                    !error && <>
+                        <div><Button onClick={createRoom}>Create</Button></div>
+                        {rooms.map((data, index) => <div className={styles.column} key={index}>
+                            <Room
+                                id={data.id}
+                                name={data.name}
+                                description={data.description}
+                                rate={data.rate}
+                                isActive={data.active}
+                            />
+                        </div>)}
+                    </>
+                }
             </div>
         </div>
     );
