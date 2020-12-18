@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './RoomTypes.module.css';
 import Room from '../room/Room';
+import Button from '../button/Button';
 
 const RoomTypes = () => {
 
@@ -34,10 +35,14 @@ const RoomTypes = () => {
         });
     }
 
+    const createRoom = () => {
+        history.push('/room-types/create');
+    }
+
     return (
         <div className={styles.center}>
             <h2>Rooms</h2>
-            <button>create</button>
+            <Button onClick={createRoom}>Create</Button>
             <div className={styles.row}>
                 {rooms ? rooms.map(
                     (data, index) => <div className={styles.column} key={index}><Room

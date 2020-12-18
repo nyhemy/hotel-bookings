@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './Reservations.module.css';
 import Reservation from '../reservation/Reservation';
+import Button from '../button/Button';
 
 const Reservations = () => {
 
@@ -35,10 +36,14 @@ const Reservations = () => {
         });
     }
 
+    const createReservation = () => {
+        history.push("/reservations/create")
+    }
+
     return (
         <div className={styles.center}>
             <h2>Reservations</h2>
-            <button>create</button>
+            <Button onClick={createReservation}>Create</Button>
             <div className={styles.row}>
                 {reservations ? reservations.map(
                     (data, index) => <div className={styles.column} key={index}><Reservation

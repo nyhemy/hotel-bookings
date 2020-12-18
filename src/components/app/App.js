@@ -38,6 +38,7 @@ const App = (props) => {
         <Route exact path="/" render={() => <Login login={(bool) => setLoggedIn(bool)} loggedIn={loggedIn} isManager={(bool) => setIsManager(bool)} />}/>
         <Route exact path="/reservations" component={Reservations} />
         <Route exact path="/reservations/create" component={ReservationCreate} />
+        <Route exact path="/reservations/edit/:id" />
         <Route exact path="/room-types" component={RoomTypes} />
         <Route exact path="/room-types/create" component={RoomCreate} />
         <Route exact path="/logout" render={() => <Logout logout={(bool) => setLoggedIn(bool)} />} />
