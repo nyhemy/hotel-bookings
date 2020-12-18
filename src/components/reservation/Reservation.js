@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Reservation.module.css';
+import { useHistory } from 'react-router-dom';
 import Button from '../button/Button';
 
 const Reservation = (props) => {
@@ -7,6 +8,7 @@ const Reservation = (props) => {
     const axios = require('axios').default;
 
     const [rooms, setRooms] = useState([]);
+    const history = useHistory();
 
     useEffect (() => {
 
@@ -62,6 +64,10 @@ const Reservation = (props) => {
         window.location.reload();
     }
 
+    const editReservation = () => {
+        history.push('/reservations/edit/:id')
+    }
+
     return (
         <div className={styles.card}>
             <div>Guest: {guestEmail}</div>
@@ -69,7 +75,7 @@ const Reservation = (props) => {
             <div>CheckIn date: {checkInDate}</div>
             <div>Number of nights: {numberOfNights}</div>
             <div>Stay Cost: {getStayCost(roomTypeId)}</div>
-            <div><button>edit</button><Button onClick={deleteReservation}>Delete</Button></div>
+            <div><Button onClick={editReservation}>Edit</Button><Button onClick={deleteReservation}>Delete</Button></div>
         </div>
     );
 }

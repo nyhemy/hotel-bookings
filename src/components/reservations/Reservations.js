@@ -10,6 +10,8 @@ const Reservations = () => {
     const history = useHistory();
 
     const [reservations, setReservations] = useState([]);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
     
     useEffect(() => {
         if (!sessionStorage.getItem("token")) {
@@ -21,6 +23,8 @@ const Reservations = () => {
 
     // fetches reservations from API and sets them to reservations state
     const getReservations = () => {
+        setError(false);
+        setLoading(true);
         axios.get('http://localhost:8080/reservations', {
             headers: {
                 'Content-Type': 'application/json',
@@ -29,10 +33,12 @@ const Reservations = () => {
             }
         })
         .then(response => {
+            setLoading(false);
             setReservations(response.data);
         })
         .catch(error => {
-            console.log(error);
+            setLoading(false);
+            setError(true);
         });
     }
 
@@ -43,18 +49,25 @@ const Reservations = () => {
     return (
         <div className={styles.center}>
             <h2>Reservations</h2>
-            <Button onClick={createReservation}>Create</Button>
+            {error && <div className={styles.error}>Oops something went wrong</div>}
             <div className={styles.row}>
-                {reservations ? reservations.map(
-                    (data, index) => <div className={styles.column} key={index}><Reservation
-                        checkInDate={data.checkInDate}
-                        guestEmail={data.guestEmail}
-                        id={data.id}
-                        numberOfNights={data.numberOfNights}
-                        roomTypeId={data.roomTypeId}
-                        user={data.user}
-                    /></div>
-                ) : "Oops something went wrong"}
+                {loading ?
+                    "Loading..."
+                :
+                    !error && <>
+                        <div><Button onClick={createReservation}>Create</Button></div>
+                        {reservations.map((data, index) => <div className={styles.column} key={index}>
+                            <Reservation
+                                checkInDate={data.checkInDate}
+                                guestEmail={data.guestEmail}
+                                id={data.id}
+                                numberOfNights={data.numberOfNights}
+                                roomTypeId={data.roomTypeId}
+                                user={data.user}
+                            />
+                        </div>)}
+                    </>
+                }
             </div>
         </div>
     );
