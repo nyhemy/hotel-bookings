@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Reservation.module.css';
+import Button from '../button/Button';
 
 const Reservation = (props) => {
     const {checkInDate, guestEmail, id, numberOfNights, roomTypeId, user} = props;
@@ -47,6 +48,20 @@ const Reservation = (props) => {
         }
     }
 
+    const deleteReservation = () => {
+        axios.delete('http://localhost:8080/reservations/' + id, {
+            headers: {
+                'Content-Type': 'application/json',
+                'mode': 'cors',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            data: {
+                id: id
+            }
+        });
+        window.location.reload();
+    }
+
     return (
         <div className={styles.card}>
             <div>Guest: {guestEmail}</div>
@@ -54,7 +69,7 @@ const Reservation = (props) => {
             <div>CheckIn date: {checkInDate}</div>
             <div>Number of nights: {numberOfNights}</div>
             <div>Stay Cost: {getStayCost(roomTypeId)}</div>
-            <div><button>edit</button><button>delete</button></div>
+            <div><button>edit</button><Button onClick={deleteReservation}>Delete</Button></div>
         </div>
     );
 }
