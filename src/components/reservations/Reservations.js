@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styles from './Reservations.module.css';
 import Reservation from '../reservation/Reservation';
 import Button from '../button/Button';
+import loadImg from '../ajax-loader.gif';
 
 const Reservations = () => {
 
@@ -49,10 +50,10 @@ const Reservations = () => {
     return (
         <div className={styles.center}>
             <h2>Reservations</h2>
-            {error && <div className={styles.error}>Oops something went wrong</div>}
+            {error && <h3 className={styles.error}>Oops something went wrong</h3>}
             <div className={styles.row}>
                 {loading ?
-                    "Loading..."
+                    <img src={loadImg} alt="loading..." />
                 :
                     !error && <>
                         <div><Button onClick={createReservation}>Create</Button></div>
