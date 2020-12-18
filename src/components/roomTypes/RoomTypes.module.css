@@ -10,6 +10,9 @@
     float: left;
     width: 25%;
     padding: 15px 10px;
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
 }
 
 .row {
