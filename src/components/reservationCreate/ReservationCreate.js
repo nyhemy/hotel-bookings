@@ -84,7 +84,8 @@ const ReservationCreate = () => {
                         <div className={styles.input}><input type='number' name='numNights' placeholder='number of nights' onChange={handleChange} /></div>
                         <div>
                         <select className={styles.select} name='room' onChange={handleChange}>
-                            {rooms.map((data, index) => <option className={styles.select} key={index}>
+                        <option selected disabled hidden>--select room--</option>
+                            {rooms.map((data, index) => <option key={index}>
                                 {data.name}
                             </option>)}
                         </select>
