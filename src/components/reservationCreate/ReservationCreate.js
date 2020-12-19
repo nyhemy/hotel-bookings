@@ -81,6 +81,16 @@ const ReservationCreate = () => {
         if (!validEmailRegex.test(email)) {
             formState = false;
         }
+
+        setLoading(true);
+
+        axios.post('http://localhost:8080/reservations', {
+            user: null,
+            guestEmail : email,
+            roomTypeId: null,
+            checkInDate: date,
+            numberOfNights: numNights
+        })
     }
 
     return (
@@ -95,8 +105,8 @@ const ReservationCreate = () => {
                         <div className={styles.input}><input type='text' name='date' placeholder='check-in date' onChange={handleChange} /></div>
                         <div className={styles.input}><input type='number' name='numNights' placeholder='number of nights' onChange={handleChange} /></div>
                         <div>
-                        <select className={styles.select} name='room' onChange={handleChange}>
-                        <option selected disabled hidden>--select room--</option>
+                        <select defaultValue={'DEFAULT'} className={styles.select} name='room' onChange={handleChange}>
+                        <option value='DEFAULT' disabled hidden>--select room--</option>
                             {rooms.map((data, index) => <option key={index}>
                                 {data.name}
                             </option>)}
