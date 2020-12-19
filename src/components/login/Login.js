@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './Login.module.css';
+import loadImg from '../ajax-loader.gif';
 
 const Login = (props) => {
     const {login, loggedIn, isManager} = props;
@@ -13,6 +14,7 @@ const Login = (props) => {
 
     const [formValid, setFormValid] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
+    const [loading, setLoading] = useState(false);
     
     const handleChange = (event) => {
         event.preventDefault();
@@ -40,11 +42,15 @@ const Login = (props) => {
             setErrorMsg("Invalid email or password");
         }
 
+        setLoading(true);
+
         axios.post('http://localhost:8080/login', {
             email : email,
             password: password
         })
         .then(response => {
+            setLoading(false);
+
             let token = response.data.token;
             sessionStorage.setItem("token", token);
             let decodedToken = JSON.parse(atob(token.split('.')[1]));
@@ -58,8 +64,13 @@ const Login = (props) => {
             history.push("/reservations");
         })
         .catch(error => {
+            setLoading(false);
             formState = false;
-            setErrorMsg("Invalid email or password");
+            if(error.response) {
+                setErrorMsg("Invalid email or password");
+            } else {
+                setErrorMsg("Oops something went wrong");
+            }
         });
         
         setFormValid(formState);
@@ -67,16 +78,16 @@ const Login = (props) => {
 
 
     return (
-        <div className={styles.center}>
+        <div className={styles.container}>
             {loggedIn && <>
                 <h3>{"Welcome to Hotel Bookings " + JSON.parse(atob(sessionStorage.getItem("token").split('.')[1])).sub}</h3>
             </>}
 
             {!loggedIn && <>
                 <form onSubmit={handleSubmit} noValidate>
-                    <div className={styles.error}>{!formValid && errorMsg}</div>
                     <div><input type="email" name="email" placeholder="email" onChange={handleChange} /></div>
                     <div><input type="password" name="password" placeholder="password" onChange={handleChange} /></div>
+                    <div className={styles.notification}>{loading ? <img src={loadImg} alt="loading..." /> : !formValid && errorMsg}</div>
                     <button className={styles.button} type="submit">login</button>
                 </form>
             </>}

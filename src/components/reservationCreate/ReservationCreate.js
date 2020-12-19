@@ -9,10 +9,13 @@ const ReservationCreate = () => {
     const axios = require('axios').default;
     const history = useHistory();
 
+    // states used for component functionality
     const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [formValid, setFormValid] = useState(false);
 
+    // states for form input
     const [email, setEmail] = useState('');
     const [date, setDate] = useState('');
     const [numNights, setNumNights] = useState('');
@@ -67,8 +70,17 @@ const ReservationCreate = () => {
         }      
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
 
+        let formState = true;
+
+        const validEmailRegex = 
+          RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
+
+        if (!validEmailRegex.test(email)) {
+            formState = false;
+        }
     }
 
     return (
