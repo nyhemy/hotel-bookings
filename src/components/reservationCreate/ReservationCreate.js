@@ -75,9 +75,16 @@ const ReservationCreate = () => {
 
         const validEmailRegex = 
           RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
+        
+        const validDateRegex = RegExp(/(0[1-9]|1[012])[- -.](0[1-9]|[12][0-9]|3[01])[- -.](20)\d\d/i);
 
         if (!validEmailRegex.test(email)) {
             setErrorMsg('Must be a valid email');
+            return;
+        }
+
+        if (!validDateRegex.test(date)) {
+            setErrorMsg('Date must be mm-dd-yyyy');
             return;
         }
 
