@@ -8,7 +8,7 @@
     margin: 0 auto 0;
     padding-top: 20px;
     padding-bottom: 20px;
-    width: 350px;
+    width: 275px;
     border: solid;
     border-radius: 10px;
     border-color: #22752a;
@@ -19,14 +19,26 @@
 }
 
 .select {
-    margin-top: 20px;
     width: 115px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
+.divider {
+    margin-top: 26px;
+    border-top: solid;
+    border-color: #22752a;
+}
+
 .error {
     color: red;
     height: 20px;
+}
+
+.inputError {
+    color: red;
+    font-size: 12px;
+    height: 26px;
+    padding-top: 10px;
 }
