@@ -12,7 +12,7 @@ const ReservationCreate = () => {
     // states used for component functionality
     const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
     const [formValid, setFormValid] = useState(false);
 
     // states for form input
@@ -30,7 +30,7 @@ const ReservationCreate = () => {
     }, []);
 
     const getRoomTypes = () => {
-        setError(false);
+        setErrorMsg('');
         setLoading(true);
         axios.get('http://localhost:8080/room-types', {
             headers: {
@@ -45,7 +45,7 @@ const ReservationCreate = () => {
         })
         .catch(error => {
             setLoading(false);
-            setError(true);
+            setErrorMsg('Oops something went wrong');
         });
     }
 
@@ -72,6 +72,7 @@ const ReservationCreate = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setErrorMsg('');
 
         let formState = true;
 
@@ -84,22 +85,41 @@ const ReservationCreate = () => {
 
         setLoading(true);
 
-        axios.post('http://localhost:8080/reservations', {
-            user: null,
+        axios.post('http://localhost:8080/reservations',
+            {
+            user: sessionStorage.getItem('email'),
             guestEmail : email,
-            roomTypeId: null,
+            roomTypeId: room,
             checkInDate: date,
             numberOfNights: numNights
+            },
+            {headers: {
+                'Content-Type': 'application/json',
+                'mode': 'cors',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }}
+        )
+        .then(response => {
+            setLoading(false);
+            history.push('/reservations');
         })
+        .catch(error => {
+            setLoading(false);
+            formState = false;
+            setErrorMsg('Oops something went wrong');
+        })
+
+        setFormValid(formState);
     }
 
     return (
         <div className={styles.container}>
-            {error && <h3 className={styles.error}>Oops something went wrong</h3>}
+            <h2>Create Reservation</h2>
+            <h3 className={styles.error}>{errorMsg}</h3>
             {loading ?
                 <img src={loadImg} alt="loading..." />
             :
-                !error && <>
+                !errorMsg && <>
                     <form className={styles.form} onSubmit={handleSubmit} noValidate>
                         <div className={styles.input}><input type='email' name='email' placeholder='email' onChange={handleChange} /></div> 
                         <div className={styles.input}><input type='text' name='date' placeholder='check-in date' onChange={handleChange} /></div>
@@ -107,7 +127,7 @@ const ReservationCreate = () => {
                         <div>
                         <select defaultValue={'DEFAULT'} className={styles.select} name='room' onChange={handleChange}>
                         <option value='DEFAULT' disabled hidden>--select room--</option>
-                            {rooms.map((data, index) => <option key={index}>
+                            {rooms.map((data, index) => <option value={data.id} key={index}>
                                 {data.name}
                             </option>)}
                         </select>

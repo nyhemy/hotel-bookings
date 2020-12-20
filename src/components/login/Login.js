@@ -55,11 +55,15 @@ const Login = (props) => {
             sessionStorage.setItem("token", token);
             let decodedToken = JSON.parse(atob(token.split('.')[1]));
             let role = decodedToken.roles;
+            let userEmail = decodedToken.sub;
 
             if (role === "manager") {
                 isManager(true);
                 sessionStorage.setItem("role", role);
             }
+
+            sessionStorage.setItem("email", userEmail);
+            
             login(true);
             history.push("/reservations");
         })
