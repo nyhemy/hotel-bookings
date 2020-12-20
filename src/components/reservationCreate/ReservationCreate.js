@@ -13,7 +13,6 @@ const ReservationCreate = () => {
     const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
-    const [formValid, setFormValid] = useState(false);
 
     // states for form input
     const [email, setEmail] = useState('');
@@ -74,13 +73,12 @@ const ReservationCreate = () => {
         event.preventDefault();
         setErrorMsg('');
 
-        let formState = true;
-
         const validEmailRegex = 
           RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
 
         if (!validEmailRegex.test(email)) {
-            formState = false;
+            setErrorMsg('Must be a valid email');
+            return;
         }
 
         setLoading(true);
@@ -105,37 +103,34 @@ const ReservationCreate = () => {
         })
         .catch(error => {
             setLoading(false);
-            formState = false;
             setErrorMsg('Oops something went wrong');
         })
-
-        setFormValid(formState);
     }
 
     return (
         <div className={styles.container}>
             <h2>Create Reservation</h2>
-            <h3 className={styles.error}>{errorMsg}</h3>
-            {loading ?
+            <h3 className={styles.error}>{loading ?
                 <img src={loadImg} alt="loading..." />
             :
-                !errorMsg && <>
-                    <form className={styles.form} onSubmit={handleSubmit} noValidate>
-                        <div className={styles.input}><input type='email' name='email' placeholder='email' onChange={handleChange} /></div> 
-                        <div className={styles.input}><input type='text' name='date' placeholder='check-in date' onChange={handleChange} /></div>
-                        <div className={styles.input}><input type='number' name='numNights' placeholder='number of nights' onChange={handleChange} /></div>
-                        <div>
-                        <select defaultValue={'DEFAULT'} className={styles.select} name='room' onChange={handleChange}>
-                        <option value='DEFAULT' disabled hidden>--select room--</option>
-                            {rooms.map((data, index) => <option value={data.id} key={index}>
-                                {data.name}
-                            </option>)}
-                        </select>
-                            <button type='submit'>Create</button>
-                        </div>
-                    </form>
-                </>
-            }
+                errorMsg}
+            </h3>
+            <>
+                <form className={styles.form} onSubmit={handleSubmit} noValidate>
+                    <div className={styles.input}><input type='email' name='email' placeholder='email' onChange={handleChange} /></div> 
+                    <div className={styles.input}><input type='text' name='date' placeholder='check-in date' onChange={handleChange} /></div>
+                    <div className={styles.input}><input type='number' name='numNights' placeholder='number of nights' onChange={handleChange} /></div>
+                    <div>
+                    <select defaultValue={'DEFAULT'} className={styles.select} name='room' onChange={handleChange}>
+                    <option value='DEFAULT' disabled hidden>--select room--</option>
+                        {rooms.map((data, index) => <option value={data.id} key={index}>
+                            {data.name}
+                        </option>)}
+                    </select>
+                        <button type='submit'>Create</button>
+                    </div>
+                </form>
+            </>
         </div>
     );
 }
