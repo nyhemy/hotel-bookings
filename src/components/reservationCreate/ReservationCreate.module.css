@@ -11,7 +11,7 @@
     width: 275px;
     border: solid;
     border-radius: 10px;
-    border-color: #22752a;
+    border-color: #22752aad;
     background-color:rgba(212, 212, 212, 0.288);
     box-shadow: 0 4px 8px 0 rgba(7, 59, 20, 0.19), 0 6px 20px 0 rgba(7, 59, 20, 0.19);}
 
@@ -28,8 +28,8 @@
 
 .divider {
     margin-top: 26px;
-    border-top: solid;
-    border-color: #22752a;
+    border-top: double;
+    border-color: #22752aad;
 }
 
 .error {
