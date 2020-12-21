@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { get } from '../Functions';
+import styles from './ReservationEdit.module.css';
 
 const ReservationEdit = () => {
 
@@ -12,7 +13,8 @@ const ReservationEdit = () => {
 
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [reservation, setReservation] = useState();
+    const [reservation, setReservation] = useState({});
+    const [rooms, setRooms] = useState([]);
     
     useEffect(() => {
         if (!sessionStorage.getItem("token")) {
@@ -20,6 +22,7 @@ const ReservationEdit = () => {
         }
 
         get('/reservations/' + id, setError, setLoading, setReservation);
+        get('/room-types', setError, setLoading, setRooms);
     }, []);
 
     // const getReservation = () => {
@@ -44,13 +47,19 @@ const ReservationEdit = () => {
 
     return (
         <div>
-            <form>
-                <input type='email' />
-                <input type='text'/>
-                <input type='number'/>
-                <select>
+            <form className={styles.center}>
+                <div>Email</div>
+                <div><input value={reservation.guestEmail} type='email' /></div>
+                <div>Check-In Date</div>
+                <div><input value={reservation.checkInDate} type='text'/></div>
+                <div>Nights</div>
+                <div><input value={reservation.numberOfNights} type='number'/></div>
+                <div>Room</div>
+                <div>
+                    <select>
                     <option value='DEFAULT' disabled>--select room--</option>
-                </select>
+                    </select>
+                </div>
             </form>
         </div>
     );
