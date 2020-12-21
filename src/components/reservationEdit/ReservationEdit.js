@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import { get } from '../Functions';
 
 const ReservationEdit = () => {
 
@@ -18,32 +19,39 @@ const ReservationEdit = () => {
             history.push("/");
         }
 
-        getReservation();
+        get('/reservations/' + id, setError, setLoading, setReservation);
     }, []);
 
-    const getReservation = () => {
-        setError(false);
-        setLoading(true);
-        axios.get('http://localhost:8080/reservations/' + id, {
-            headers: {
-                'Content-Type': 'application/json',
-                'mode': 'cors',
-                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-            }
-        })
-        .then(response => {
-            setLoading(false);
-            setReservation(response.data);
-        })
-        .catch(error => {
-            setLoading(false);
-            setError(true);
-        });
-    }
+    // const getReservation = () => {
+    //     setError(false);
+    //     setLoading(true);
+    //     axios.get('http://localhost:8080/reservations/' + id, {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'mode': 'cors',
+    //             'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+    //         }
+    //     })
+    //     .then(response => {
+    //         setLoading(false);
+    //         setReservation(response.data);
+    //     })
+    //     .catch(error => {
+    //         setLoading(false);
+    //         setError(true);
+    //     });
+    // }
 
     return (
         <div>
-            
+            <form>
+                <input type='email' />
+                <input type='text'/>
+                <input type='number'/>
+                <select>
+                    <option value='DEFAULT' disabled>--select room--</option>
+                </select>
+            </form>
         </div>
     );
 }

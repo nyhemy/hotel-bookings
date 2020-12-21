@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styles from './ReservationCreate.module.css';
 import Button from '../button/Button';
 import loadImg from '../ajax-loader.gif';
+import { get } from '../Functions';
 
 const ReservationCreate = () => {
 
@@ -31,28 +32,28 @@ const ReservationCreate = () => {
             history.push("/");
         }
         
-        getRoomTypes();
+        get('/room-types', setErrorMsg, setLoading, setRooms);
     }, []);
 
-    const getRoomTypes = () => {
-        setErrorMsg('');
-        setLoading(true);
-        axios.get('http://localhost:8080/room-types', {
-            headers: {
-                'Content-Type': 'application/json',
-                'mode': 'cors',
-                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-            }
-        })
-        .then(response => {
-            setLoading(false);
-            setRooms(response.data);
-        })
-        .catch(error => {
-            setLoading(false);
-            setErrorMsg('Oops something went wrong');
-        });
-    }
+    // const getRoomTypes = () => {
+    //     setErrorMsg('');
+    //     setLoading(true);
+    //     axios.get('http://localhost:8080/room-types', {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'mode': 'cors',
+    //             'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+    //         }
+    //     })
+    //     .then(response => {
+    //         setLoading(false);
+    //         setRooms(response.data);
+    //     })
+    //     .catch(error => {
+    //         setLoading(false);
+    //         setErrorMsg('Oops something went wrong');
+    //     });
+    // }
 
 
     const handleChange = (event) => {
