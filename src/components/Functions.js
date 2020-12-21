@@ -21,8 +21,4 @@ const get = (endpoint, setErrorMsg, setLoading, setDataState) => {
     });
 }
 
-const post = (endpoint, body, header) => {
-
-}
-
-export { get, post };
+export { get };
