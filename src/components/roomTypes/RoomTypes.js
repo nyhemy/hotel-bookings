@@ -15,17 +15,15 @@ const RoomTypes = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect (() => {
-        if (!sessionStorage.getItem("token")) {
+        if (!sessionStorage.getItem("token") || sessionStorage.getItem("role") !== "manager") {
             history.push("/");
         }
 
-        getRoomTypes();
-    }, []);
-
-    const getRoomTypes = () => {
+        const getRoomTypes = () => {
         setError(false);
         setLoading(true);
-        axios.get('http://localhost:8080/room-types', {
+        axios.get('http://localhost:8080/room-types', 
+        {
             headers: {
                 'Content-Type': 'application/json',
                 'mode': 'cors',
@@ -41,6 +39,10 @@ const RoomTypes = () => {
             setError(true);
         });
     }
+
+        getRoomTypes();
+    }, [axios, history]);
+
 
     const createRoom = () => {
         history.push('/room-types/create');
