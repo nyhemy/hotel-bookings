@@ -65,7 +65,7 @@ const Reservation = (props) => {
     }
 
     const editReservation = () => {
-        history.push('/reservations/edit/:id')
+        history.push('/reservations/edit/' + id)
     }
 
     return (
