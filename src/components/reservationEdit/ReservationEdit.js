@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { get, getSimple } from '../Functions';
 import styles from './ReservationEdit.module.css';
@@ -129,7 +129,8 @@ const ReservationEdit = () => {
 
         setLoading(true);
 
-        axios.post('http://localhost:8080/reservations',
+        axios.put('http://localhost:8080/reservations/' + id,
+
             {
             user: sessionStorage.getItem('email'),
             guestEmail : email,
@@ -169,10 +170,9 @@ const ReservationEdit = () => {
                 <div>{roomError}</div>
                 <div>
                     <select value={room} name={'room'} onChange={handleChange}>
-                    {/* <option value='DEFAULT' disabled>--select room--</option> */}
-                    {rooms.map((data, index) => <option value={data.id} key={index}>
-                        {data.name}
-                    </option>)}
+                        {rooms.map((data, index) => <option value={data.id} key={index}>
+                            {data.name}
+                        </option>)}
                     </select>
                     <div><button type='submit'>Create</button></div>
                 </div>
