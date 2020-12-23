@@ -70,11 +70,13 @@ const Reservation = (props) => {
 
     return (
         <div className={styles.card}>
-            <div>Guest: {guestEmail}</div>
-            <div>Room type: {getRoomType(roomTypeId)}</div>
-            <div>CheckIn date: {checkInDate}</div>
-            <div>Number of nights: {numberOfNights}</div>
-            <div>Stay Cost: {getStayCost(roomTypeId)}</div>
+            <div className={styles.container}>
+                <div>Guest: {guestEmail}</div>
+                <div>Room type: {getRoomType(roomTypeId)}</div>
+                <div>CheckIn date: {checkInDate}</div>
+                <div>Number of nights: {numberOfNights}</div>
+                <div>Stay Cost: {getStayCost(roomTypeId)}</div>
+            </div>
             <div><Button onClick={editReservation}>Edit</Button><Button onClick={deleteReservation}>Delete</Button></div>
         </div>
     );
