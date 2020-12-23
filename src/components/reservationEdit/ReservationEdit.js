@@ -133,6 +133,7 @@ const ReservationEdit = () => {
         axios.put('http://localhost:8080/reservations/' + id,
 
             {
+            id,
             user: sessionStorage.getItem('email'),
             guestEmail : email,
             roomTypeId: room,

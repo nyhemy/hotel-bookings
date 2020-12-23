@@ -150,14 +150,13 @@ const ReservationCreate = () => {
             </h3>
             <>
                 <form className={styles.form} onSubmit={handleSubmit} noValidate>
+                    <div className={styles.input}><input type='email' name='email' placeholder='email' onChange={handleChange} /></div>
                     <div className={styles.inputError}>{emailError}</div>
-                    <div className={styles.input}><input type='email' name='email' placeholder='email' onChange={handleChange} /></div> 
-                    <div className={styles.inputError}>{dateError}</div>
                     <div className={styles.input}><input type='text' name='date' placeholder='check-in date' onChange={handleChange} /></div>
-                    <div className={styles.inputError}>{numNightError}</div>
+                    <div className={styles.inputError}>{dateError}</div>
                     <div className={styles.input}><input type='number' name='numNights' placeholder='number of nights' onChange={handleChange} /></div>
+                    <div className={styles.inputError}>{numNightError}</div>
                     <div className={styles.divider}>
-                    <div className={styles.inputError}>{roomError}</div>
                     <select defaultValue={'DEFAULT'} className={styles.select} name='room' onChange={handleChange}>
                     <option value='DEFAULT' disabled>--select room--</option>
                         {rooms.map((data, index) => <option value={data.id} key={index}>
@@ -166,6 +165,7 @@ const ReservationCreate = () => {
                     </select>
                         <button type='submit'>Create</button>
                     </div>
+                    <div className={styles.inputError}>{roomError}</div>
                 </form>
             </>
         </div>
