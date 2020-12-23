@@ -157,12 +157,12 @@ const ReservationCreate = () => {
                     <div className={styles.input}><input type='number' name='numNights' placeholder='number of nights' onChange={handleChange} /></div>
                     <div className={styles.inputError}>{numNightError}</div>
                     <div className={styles.divider}>
-                    <select defaultValue={'DEFAULT'} className={styles.select} name='room' onChange={handleChange}>
-                    <option value='DEFAULT' disabled>--select room--</option>
-                        {rooms.map((data, index) => <option value={data.id} key={index}>
-                            {data.name}
-                        </option>)}
-                    </select>
+                        <select defaultValue={'DEFAULT'} className={styles.select} name='room' onChange={handleChange}>
+                            <option value='DEFAULT' disabled>--select room--</option>
+                            {rooms.map((data, index) => <option value={data.id} key={index}>
+                                {data.name}
+                            </option>)}
+                        </select>
                         <button type='submit'>Create</button>
                     </div>
                     <div className={styles.inputError}>{roomError}</div>
