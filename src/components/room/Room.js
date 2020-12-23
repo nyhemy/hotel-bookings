@@ -7,7 +7,7 @@ const Room = (props) => {
     return (
         <div className={styles.card}>
             <div>Room: {name}</div>
-            <div>Description: {description}</div>
+            <div className={styles.description} >Description: {description}</div>
             <div>Rate: {rate}</div>
             <div>{isActive ? "Active" : "Inactive"}</div>
             <div><button>edit</button></div>
