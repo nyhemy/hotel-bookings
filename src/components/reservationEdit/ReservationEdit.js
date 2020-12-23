@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { get, getSimple } from '../Functions';
+import loadImg from '../ajax-loader.gif';
 import styles from './ReservationEdit.module.css';
 
 const ReservationEdit = () => {
@@ -113,7 +114,7 @@ const ReservationEdit = () => {
             noValidate = true;
         }
 
-        if (numNights == 0) {
+        if (numNights === 0 || numNights === '0' || numNights === '') {
             setNumNightsError('Must be number greater than zero');
             noValidate = true;
         }
@@ -155,27 +156,33 @@ const ReservationEdit = () => {
     }
 
     return (
-        <div>
-            <form className={styles.center} onSubmit={handleSubmit} noValidate>
+        <div className={styles.container}>
+            <h2>Edit Reservation</h2>
+            <h3 className={styles.error}>{loading ?
+                <img src={loadImg} alt="loading..." />
+            :
+                errorMsg}
+            </h3>
+            <form className={styles.form} onSubmit={handleSubmit} noValidate>
                 <div>Email</div>
-                <div>{emailError}</div>
-                <div><input value={email} name={'email'} type='email' onChange={handleChange}/></div>
+                <div className={styles.input}><input value={email} name={'email'} type='email' onChange={handleChange}/></div>
+                <div className={styles.inputError}>{emailError}</div>
                 <div>Check-In Date</div>
-                <div>{dateError}</div>
-                <div><input value={date} name={'date'} type='text' onChange={handleChange}/></div>
+                <div className={styles.input}><input value={date} name={'date'} type='text' onChange={handleChange}/></div>
+                <div className={styles.inputError}>{dateError}</div>
                 <div>Nights</div>
-                <div>{numNightError}</div>
-                <div><input value={numNights} name={'numNights'} type='number' onChange={handleChange}/></div>
+                <div className={styles.input}><input value={numNights} name={'numNights'} type='number' onChange={handleChange}/></div>
+                <div className={styles.inputError}>{numNightError}</div>
                 <div>Room</div>
-                <div>{roomError}</div>
                 <div>
-                    <select value={room} name={'room'} onChange={handleChange}>
+                    <select className={styles.select} value={room} name={'room'} onChange={handleChange}>
                         {rooms.map((data, index) => <option value={data.id} key={index}>
                             {data.name}
                         </option>)}
                     </select>
-                    <div><button type='submit'>Create</button></div>
+                    <button type='submit'>Update</button>
                 </div>
+                <div className={styles.inputError}>{roomError}</div>
             </form>
         </div>
     );
