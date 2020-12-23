@@ -1,6 +1,6 @@
-const get = (endpoint, setErrorMsg, setLoading, setDataState) => {
+const axios = require('axios').default;
 
-    const axios = require('axios').default;
+const get = (endpoint, setErrorMsg, setLoading, setDataState) => {
 
     setErrorMsg('');
     setLoading(true);
@@ -21,4 +21,16 @@ const get = (endpoint, setErrorMsg, setLoading, setDataState) => {
     });
 }
 
-export { get };
+const getSimple = (endpoint, setErrorMsg, setLoading) => {
+    setErrorMsg('');
+    setLoading(true);
+    return axios.get('http://localhost:8080' + endpoint, {
+        headers: {
+            'Content-Type': 'application/json',
+            'mode': 'cors',
+            'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+        }
+    })
+}
+
+export { get, getSimple };
