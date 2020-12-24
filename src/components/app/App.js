@@ -9,6 +9,7 @@ import RoomTypes from '../roomTypes/RoomTypes';
 import ReservationCreate from '../reservationCreate/ReservationCreate';
 import RoomCreate from '../roomCreate/RoomCreate';
 import ReservationEdit from '../reservationEdit/ReservationEdit';
+import RoomEdit from '../roomEdit/RoomEdit';
 
 /**
  * 
@@ -42,6 +43,7 @@ const App = (props) => {
         <Route exact path="/reservations/edit/:id" component={ReservationEdit}/>
         <Route exact path="/room-types" component={RoomTypes} />
         <Route exact path="/room-types/create" component={RoomCreate} />
+        <Route exact path="/room-types/edit/:id" component={RoomEdit}/>
         <Route exact path="/logout" render={() => <Logout logout={(bool) => setLoggedIn(bool)} />} />
         <Route path="*" component={NotFound} />
       </Switch>
