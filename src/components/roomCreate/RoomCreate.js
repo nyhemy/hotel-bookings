@@ -12,9 +12,9 @@ const RoomCreate = () => {
     const [active, setActive] = useState(false);
 
     const [nameError, setNameError] = useState('');
-    const [descriptionError, setDescriptionError] = useState('');
+    // const [descriptionError, setDescriptionError] = useState('');
     const [rateError, setRateError] = useState('');
-    const [activeError, setActiveError] = useState('');
+    // const [activeError, setActiveError] = useState('');
 
     useEffect (() => {
         if (!sessionStorage.getItem("token") || sessionStorage.getItem("role") !== "manager") {
@@ -45,15 +45,19 @@ const RoomCreate = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setNameError('');
-        setDescriptionError('');
+        // setDescriptionError('');
         setRateError('');
-        setActiveError('');
+        // setActiveError('');
 
         let noValidate = false;
 
         if (name.length < 3) {
             setNameError('Must be at least 3 characters');
             noValidate = true;
+        }
+
+        if (parseInt(rate) <= 0 || rate === '') {
+            setRateError('Must be number greater than zero');
         }
 
         if (noValidate) {
@@ -69,7 +73,7 @@ const RoomCreate = () => {
                 <div><input className={styles.input} type='text' name='name' placeholder='room name' onChange={handleChange}/></div>
                 <div className={styles.inputError}>{nameError}</div>
                 <div><input className={styles.input} type='textarea' name='description' placeholder='room description' onChange={handleChange}/></div>
-                <div className={styles.inputError}>{descriptionError}</div>
+                <div className={styles.inputError} />
                 <div><input className={styles.input} type='number' name='rate' placeholder='room rate' onChange={handleChange}/></div>
                 <div className={styles.inputError}>{rateError}</div>
                 <div className={styles.divider}><input className={styles.checkbox} type='checkbox' name='active' checked={active} onChange={handleChange}/>

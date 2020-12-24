@@ -99,7 +99,7 @@ const ReservationCreate = () => {
             noValidate = true;
         }
 
-        if (numNights === 0 || numNights === '0' || numNights === '') {
+        if (parseInt(numNights) <= 0 || numNights === '') {
             setNumNightsError('Must be number greater than zero');
             noValidate = true;
         }
