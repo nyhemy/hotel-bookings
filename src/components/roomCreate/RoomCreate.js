@@ -4,7 +4,11 @@ import styles from './RoomCreate.module.css';
 
 const RoomCreate = () => {
     
+    const axios = require('axios').default;
     const history = useHistory();
+
+    const [loading, setLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -70,6 +74,30 @@ const RoomCreate = () => {
         if (noValidate) {
             return;
         }
+
+        setLoading(true);
+
+        axios.post('http://localhost:8080/room-types',
+            {
+            name : name,
+            description: description,
+            rate: rate,
+            active: active
+            },
+            {headers: {
+                'Content-Type': 'application/json',
+                'mode': 'cors',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }}
+        )
+        .then(response => {
+            setLoading(false);
+            history.push('/room-types');
+        })
+        .catch(error => {
+            setLoading(false);
+            setErrorMsg('Oops something went wrong');
+        })
 
     }
 
