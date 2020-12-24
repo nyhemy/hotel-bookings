@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { get, getSimple } from '../Functions';
 import loadImg from '../ajax-loader.gif';
 import styles from './ReservationEdit.module.css';

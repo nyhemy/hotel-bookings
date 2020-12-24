@@ -70,6 +70,7 @@ const RoomCreate = () => {
 
         if (parseInt(rate) <= 0 || rate === '') {
             setRateError('Must be number greater than zero');
+            noValidate = true;
         }
 
         if (noValidate) {
