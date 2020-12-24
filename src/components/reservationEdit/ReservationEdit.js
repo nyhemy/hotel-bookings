@@ -18,7 +18,6 @@ const ReservationEdit = () => {
 
     const [errorMsg, setErrorMsg] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [reservation, setReservation] = useState({});
     const [rooms, setRooms] = useState([]);
 
     const [emailError, setEmailError] = useState('');
@@ -36,7 +35,6 @@ const ReservationEdit = () => {
             let res = response.data;
             setLoading(false);
 
-            setReservation(res);
             setEmail(res.guestEmail);
             setDate(res.checkInDate);
             setNumNights(res.numberOfNights);
@@ -48,7 +46,7 @@ const ReservationEdit = () => {
         });
 
         get('/room-types', setErrorMsg, setLoading, setRooms);
-    }, []);
+    }, [history, id]);
 
     // const getReservation = () => {
     //     setError(false);

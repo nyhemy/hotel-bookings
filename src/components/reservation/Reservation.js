@@ -2,34 +2,41 @@ import React, { useEffect, useState } from 'react';
 import styles from './Reservation.module.css';
 import { useHistory } from 'react-router-dom';
 import Button from '../button/Button';
+import loadImg from '../ajax-loader.gif';
+import { get } from '../Functions';
 
 const Reservation = (props) => {
-    const {checkInDate, guestEmail, id, numberOfNights, roomTypeId, user} = props;
+    const {checkInDate, guestEmail, id, numberOfNights, roomTypeId} = props;
+    
     const axios = require('axios').default;
-
-    const [rooms, setRooms] = useState([]);
     const history = useHistory();
+
+    const [errorMsg, setErrorMsg] = useState('test');
+    const [loading, setLoading] = useState(false);
+    const [rooms, setRooms] = useState([]);
+
 
     useEffect (() => {
 
-        getRoomTypes();
+        // const getRoomTypes = () => {
+        //     axios.get('http://localhost:8080/room-types', {
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'mode': 'cors',
+        //             'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+        //         }
+        //     })
+        //     .then(response => {
+        //         setRooms(response.data);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     });
+        // }
+
+        get('/room-types', setErrorMsg, setLoading, setRooms);
     }, []);
 
-    const getRoomTypes = () => {
-        axios.get('http://localhost:8080/room-types', {
-            headers: {
-                'Content-Type': 'application/json',
-                'mode': 'cors',
-                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-            }
-        })
-        .then(response => {
-            setRooms(response.data);
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    }
 
     const getRoomType = (num) => {
         let r = rooms;
@@ -70,14 +77,21 @@ const Reservation = (props) => {
 
     return (
         <div className={styles.card}>
-            <div className={styles.container}>
-                <div>Guest: {guestEmail}</div>
-                <div>Room type: {getRoomType(roomTypeId)}</div>
-                <div>CheckIn date: {checkInDate}</div>
-                <div>Number of nights: {numberOfNights}</div>
-                <div>Stay Cost: {getStayCost(roomTypeId)}</div>
+        {errorMsg !== '' && errorMsg}
+        {loading ?
+                <img src={loadImg} alt="loading..." />
+        :
+            errorMsg === '' && <div>
+                <div className={styles.container}>
+                    <div>Guest: {guestEmail}</div>
+                    <div>Room type: {getRoomType(roomTypeId)}</div>
+                    <div>CheckIn date: {checkInDate}</div>
+                    <div>Number of nights: {numberOfNights}</div>
+                    <div>Stay Cost: {getStayCost(roomTypeId)}</div>
+                </div>
+                <div><Button onClick={editReservation}>Edit</Button><Button onClick={deleteReservation}>Delete</Button></div>
             </div>
-            <div><Button onClick={editReservation}>Edit</Button><Button onClick={deleteReservation}>Delete</Button></div>
+        }
         </div>
     );
 }

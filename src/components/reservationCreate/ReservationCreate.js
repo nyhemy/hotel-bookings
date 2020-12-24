@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './ReservationCreate.module.css';
-import Button from '../button/Button';
 import loadImg from '../ajax-loader.gif';
 import { get } from '../Functions';
 
@@ -33,7 +32,7 @@ const ReservationCreate = () => {
         }
         
         get('/room-types', setErrorMsg, setLoading, setRooms);
-    }, []);
+    }, [history]);
 
     // const getRoomTypes = () => {
     //     setErrorMsg('');
@@ -100,7 +99,7 @@ const ReservationCreate = () => {
             noValidate = true;
         }
 
-        if (numNights == 0) {
+        if (numNights === 0 || numNights === '0' || numNights === '') {
             setNumNightsError('Must be number greater than zero');
             noValidate = true;
         }
