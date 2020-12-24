@@ -8,7 +8,6 @@ import { get } from '../Functions';
 
 const Reservations = () => {
 
-    const axios = require('axios').default;
     const history = useHistory();
 
     const [reservations, setReservations] = useState([]);
@@ -21,7 +20,7 @@ const Reservations = () => {
         }
 
         get('/reservations', setErrorMsg, setLoading, setReservations);
-    }, []);
+    }, [history]);
 
     // fetches reservations from API and sets them to reservations state
     // const getReservations = () => {
