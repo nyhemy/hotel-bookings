@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './RoomCreate.module.css';
+import loadImg from '../ajax-loader.gif';
 
 const RoomCreate = () => {
     
@@ -104,6 +105,11 @@ const RoomCreate = () => {
     return (
         <div className={styles.container}>
         <h2>Create Room</h2>
+        <h3 className={styles.error}>{loading ?
+            <img src={loadImg} alt="loading..." />
+        :
+            errorMsg}
+        </h3>
             <form className={styles.form} onSubmit={handleSubmit} noValidate>
                 <div><input className={styles.input} type='text' name='name' placeholder='room name' onChange={handleChange}/></div>
                 <div className={styles.inputError}>{nameError}</div>
@@ -112,7 +118,7 @@ const RoomCreate = () => {
                 <div><input className={styles.input} type='number' name='rate' placeholder='room rate' onChange={handleChange}/></div>
                 <div className={styles.inputError}>{rateError}</div>
                 <div className={styles.divider}><input className={styles.checkbox} type='checkbox' name='active' checked={active} onChange={handleChange}/>
-                    <label className={styles.checkboxLabel} for='checkbox'>Active</label>
+                    <label className={styles.checkboxLabel}>Active</label>
                     <button className={styles.button} type='submit'>Create</button>
                 </div>
             </form>
