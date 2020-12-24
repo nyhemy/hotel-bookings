@@ -18,16 +18,24 @@
     margin: 2px;
 }
 
-.select {
-    margin-top: 10px;
-    width: 115px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+.checkbox {
+    float: left;
+    margin-left: 30px;
+}
+
+.checkboxLabel {
+    float: left;
+}
+
+.button {
+    float: right;
+    margin-right: 30px;
 }
 
 .divider {
     margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
     border-top: double;
     border-color: #22752aad;
 }

@@ -42,7 +42,23 @@ const RoomCreate = () => {
         }
     }
     
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setNameError('');
+        setDescriptionError('');
+        setRateError('');
+        setActiveError('');
+
+        let noValidate = false;
+
+        if (name.length < 3) {
+            setNameError('Must be at least 3 characters');
+            noValidate = true;
+        }
+
+        if (noValidate) {
+            return;
+        }
 
     }
 
@@ -51,10 +67,14 @@ const RoomCreate = () => {
         <h2>Create Room</h2>
             <form className={styles.form} onSubmit={handleSubmit} noValidate>
                 <div><input className={styles.input} type='text' name='name' placeholder='room name' onChange={handleChange}/></div>
+                <div className={styles.inputError}>{nameError}</div>
                 <div><input className={styles.input} type='textarea' name='description' placeholder='room description' onChange={handleChange}/></div>
+                <div className={styles.inputError}>{descriptionError}</div>
                 <div><input className={styles.input} type='number' name='rate' placeholder='room rate' onChange={handleChange}/></div>
-                <div>Active: <input className={styles.input} type='checkbox' name='active' checked={active} onChange={handleChange}/></div>
-                <div><button type='submit'>Create</button>
+                <div className={styles.inputError}>{rateError}</div>
+                <div className={styles.divider}><input className={styles.checkbox} type='checkbox' name='active' checked={active} onChange={handleChange}/>
+                    <label className={styles.checkboxLabel} for='checkbox'>Active</label>
+                    <button className={styles.button} type='submit'>Create</button>
                 </div>
             </form>
         </div>
