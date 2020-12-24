@@ -17,6 +17,7 @@ const RoomTypes = () => {
     useEffect (() => {
         if (!sessionStorage.getItem("token") || sessionStorage.getItem("role") !== "manager") {
             history.push("/");
+            window.location.reload();
         }
 
         const getRoomTypes = () => {
