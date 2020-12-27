@@ -158,9 +158,13 @@ const ReservationCreate = () => {
                     <div className={styles.divider}>
                         <select defaultValue={'DEFAULT'} className={styles.select} name='room' onChange={handleChange}>
                             <option value='DEFAULT' disabled>--select room--</option>
-                            {rooms.map((data, index) => <option value={data.id} key={index}>
-                                {data.name}
-                            </option>)}
+                            {rooms.map((data, index) => {
+                                if (data.active) {
+                                    return <option value={data.id} key={index}>{data.name}</option>
+                                } else {
+                                    return null;
+                                }
+                            })};
                         </select>
                         <button type='submit'>Create</button>
                     </div>

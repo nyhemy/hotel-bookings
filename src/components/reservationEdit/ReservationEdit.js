@@ -174,9 +174,13 @@ const ReservationEdit = () => {
                 <div>Room</div>
                 <div>
                     <select className={styles.select} value={room} name={'room'} onChange={handleChange}>
-                        {rooms.map((data, index) => <option value={data.id} key={index}>
-                            {data.name}
-                        </option>)}
+                        {rooms.map((data, index) => {
+                            if (data.active) {
+                                 return <option value={data.id} key={index}>{data.name}</option>
+                            }  else {
+                                return null;
+                            }
+                        })};
                     </select>
                     <button type='submit'>Update</button>
                 </div>
