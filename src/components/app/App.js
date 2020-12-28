@@ -12,14 +12,17 @@ import ReservationEdit from '../reservationEdit/ReservationEdit';
 import RoomEdit from '../roomEdit/RoomEdit';
 
 /**
- * 
- * @param {*} props 
+ * Skeleton of the App, contains Routing info as well as loggedIn and isManager states.
+ * loggedIn and isManager are passed into Login and Logout as props.
  */
-const App = (props) => {
+const App = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [isManager, setIsManager] = useState(false);
 
+  /**
+   * Checks for token and role, setting login and manager states depending on the result.
+   */
   useEffect(() => {
     if (sessionStorage.getItem("token") && !loggedIn) {
       setLoggedIn(true);

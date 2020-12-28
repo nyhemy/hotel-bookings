@@ -12,7 +12,6 @@ const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const [formValid, setFormValid] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
     const [loading, setLoading] = useState(false);
     
@@ -32,14 +31,12 @@ const Login = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let formState = true;
         setErrorMsg('');
 
         const validEmailRegex = 
           RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
 
         if (!validEmailRegex.test(email)) {
-            formState = false;
             setErrorMsg("Invalid email or password");
         }
 
@@ -70,15 +67,13 @@ const Login = (props) => {
         })
         .catch(error => {
             setLoading(false);
-            formState = false;
-            if(error.response.status === 400) {
+            if (error.response) {
                 setErrorMsg("Invalid email or password");
             } else if (error.request){
                 setErrorMsg("Oops something went wrong");
-            }
+            } 
         });
         
-        setFormValid(formState);
     }
 
 
@@ -90,9 +85,10 @@ const Login = (props) => {
 
             {!loggedIn && <>
                 <form onSubmit={handleSubmit} noValidate>
+                    <div className={styles.notification}>{loading ? <img src={loadImg} alt="loading..." /> : errorMsg}</div>
+                    <br/>
                     <div><input type="email" name="email" placeholder="email" onChange={handleChange} /></div>
                     <div><input type="password" name="password" placeholder="password" onChange={handleChange} /></div>
-                    <div className={styles.notification}>{loading ? <img src={loadImg} alt="loading..." /> : errorMsg}</div>
                     <button className={styles.button} type="submit">login</button>
                 </form>
             </>}
