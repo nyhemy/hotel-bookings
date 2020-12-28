@@ -24,3 +24,9 @@
 .container {
     padding: 4px 16px;
 }
+
+.notification {
+    color: red;
+    height: 14px;
+    font-size: 14px;
+}

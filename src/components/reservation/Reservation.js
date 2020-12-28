@@ -58,6 +58,7 @@ const Reservation = (props) => {
     }
 
     const deleteReservation = () => {
+        setLoading(true);
         axios.delete('http://localhost:8080/reservations/' + id, {
             headers: {
                 'Content-Type': 'application/json',
@@ -67,8 +68,15 @@ const Reservation = (props) => {
             data: {
                 id
             }
+        })
+        .then(response => {
+            setLoading(false);
+            window.location.reload();
+        })
+        .catch(error => {
+            setLoading(false);
+            setErrorMsg("Oops something went wrong");
         });
-        window.location.reload();
     }
 
     const editReservation = () => {
@@ -77,7 +85,7 @@ const Reservation = (props) => {
 
     return (
         <div className={styles.card}>
-        {errorMsg !== '' && errorMsg}
+        {errorMsg !== '' && <h2 className={styles.notification}>{errorMsg}</h2>}
         {loading ?
                 <img src={loadImg} alt="loading..." />
         :

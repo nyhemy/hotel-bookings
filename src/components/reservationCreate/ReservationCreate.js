@@ -34,27 +34,6 @@ const ReservationCreate = () => {
         get('/room-types', setErrorMsg, setLoading, setRooms);
     }, [history]);
 
-    // const getRoomTypes = () => {
-    //     setErrorMsg('');
-    //     setLoading(true);
-    //     axios.get('http://localhost:8080/room-types', {
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'mode': 'cors',
-    //             'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-    //         }
-    //     })
-    //     .then(response => {
-    //         setLoading(false);
-    //         setRooms(response.data);
-    //     })
-    //     .catch(error => {
-    //         setLoading(false);
-    //         setErrorMsg('Oops something went wrong');
-    //     });
-    // }
-
-
     const handleChange = (event) => {
         event.preventDefault();
         switch (event.target.name) {

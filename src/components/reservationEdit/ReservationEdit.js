@@ -166,7 +166,7 @@ const ReservationEdit = () => {
                         {rooms.map((data, index) => {
                             if (data.active) {
                                  return <option value={data.id} key={index}>{data.name}</option>
-                            }  else {
+                            } else {
                                 return null;
                             }
                         })};
