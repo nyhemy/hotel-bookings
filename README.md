@@ -44,7 +44,7 @@ Below you will find what steps you need to perform to get the app up and running
 
 2. Navigate to the frontend root directory
 
-3. Run *`npm test`
+3. Run `npm test`
 
 4. To test coverage run `npm test -- --coverage`
 
