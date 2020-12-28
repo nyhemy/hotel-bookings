@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { get, getSimple } from '../Functions';
+import { getSimple } from '../Functions';
 import styles from './RoomEdit.module.css';
 import loadImg from '../ajax-loader.gif';
 
@@ -70,7 +70,7 @@ const RoomEdit = () => {
             window.location.reload();
             history.push("/");
         }
-        
+
         setNameError('');
         setRateError('');
 
@@ -137,7 +137,7 @@ const RoomEdit = () => {
                 <div className={styles.inputError}>{rateError}</div>
                 <div className={styles.input}><input className={styles.checkbox} value={active} name={'active'} type='checkbox' checked={active} onChange={handleChange}/>
                     <label className={styles.checkboxLabel}>Active</label>
-                    <button className={styles.button} type='submit'>Create</button>
+                    <button className={styles.button} type='submit'>Update</button>
                 </div>
                 <div className={styles.inputError}></div>
             </form>

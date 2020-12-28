@@ -65,7 +65,7 @@ const Reservation = (props) => {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             data: {
-                id: id
+                id
             }
         });
         window.location.reload();
