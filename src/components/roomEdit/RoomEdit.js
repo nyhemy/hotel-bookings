@@ -21,6 +21,8 @@ const RoomEdit = () => {
     const [nameError, setNameError] = useState('');
     const [rateError, setRateError] = useState('');
 
+    const [notFound, setNotFound] = useState(false);
+
     useEffect(() => {
         if (sessionStorage.getItem("role") !== "manager") {
             window.location.reload();
@@ -39,7 +41,12 @@ const RoomEdit = () => {
         })
         .catch(error => {
             setLoading(false);
-            setErrorMsg('Oops something went wrong');
+            if (error.response.status === 404) {
+                setNotFound(true);
+                setErrorMsg('404 Not Found');
+            } else if(error.response) {
+                setErrorMsg("Oops something went wrong");
+            }
         });
 
     }, [history, id])
@@ -125,7 +132,7 @@ const RoomEdit = () => {
             :
                 errorMsg}
             </h3>
-            <form className={styles.form} onSubmit={handleSubmit} noValidate>
+            {!notFound && <form className={styles.form} onSubmit={handleSubmit} noValidate>
                 <div>Room Name</div>
                 <div className={styles.input}><input value={name} name={'name'} type='text' onChange={handleChange}/></div>
                 <div className={styles.inputError}>{nameError}</div>
@@ -140,7 +147,7 @@ const RoomEdit = () => {
                     <button className={styles.button} type='submit'>Update</button>
                 </div>
                 <div className={styles.inputError}></div>
-            </form>
+            </form>}
         </div>
     )
 }

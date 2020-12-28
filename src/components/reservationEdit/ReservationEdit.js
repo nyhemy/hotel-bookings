@@ -23,6 +23,8 @@ const ReservationEdit = () => {
     const [dateError, setDateError] = useState('');
     const [numNightError, setNumNightsError] = useState('');
     const [roomError, setRoomError] = useState('');
+
+    const [notFound, setNotFound] = useState(false);
     
     useEffect(() => {
         if (!sessionStorage.getItem("token")) {
@@ -41,31 +43,16 @@ const ReservationEdit = () => {
         })
         .catch(error => {
             setLoading(false);
-            setErrorMsg('Oops something went wrong');
+            if (error.response.status === 404) {
+                setNotFound(true);
+                setErrorMsg('404 Not Found');
+            } else if(error.response) {
+                setErrorMsg("Oops something went wrong");
+            }
         });
 
         get('/room-types', setErrorMsg, setLoading, setRooms);
     }, [history, id]);
-
-    // const getReservation = () => {
-    //     setError(false);
-    //     setLoading(true);
-    //     axios.get('http://localhost:8080/reservations/' + id, {
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'mode': 'cors',
-    //             'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-    //         }
-    //     })
-    //     .then(response => {
-    //         setLoading(false);
-    //         setReservation(response.data);
-    //     })
-    //     .catch(error => {
-    //         setLoading(false);
-    //         setError(true);
-    //     });
-    // }
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -161,7 +148,7 @@ const ReservationEdit = () => {
             :
                 errorMsg}
             </h3>
-            <form className={styles.form} onSubmit={handleSubmit} noValidate>
+            {!notFound && <form className={styles.form} onSubmit={handleSubmit} noValidate>
                 <div>Email</div>
                 <div className={styles.input}><input value={email} name={'email'} type='email' onChange={handleChange}/></div>
                 <div className={styles.inputError}>{emailError}</div>
@@ -185,7 +172,7 @@ const ReservationEdit = () => {
                     <button type='submit'>Update</button>
                 </div>
                 <div className={styles.inputError}>{roomError}</div>
-            </form>
+            </form>}
         </div>
     );
 }
