@@ -33,6 +33,7 @@ const Login = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         let formState = true;
+        setErrorMsg('');
 
         const validEmailRegex = 
           RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
@@ -70,9 +71,9 @@ const Login = (props) => {
         .catch(error => {
             setLoading(false);
             formState = false;
-            if(error.response) {
+            if(error.response.status === 400) {
                 setErrorMsg("Invalid email or password");
-            } else {
+            } else if (error.request){
                 setErrorMsg("Oops something went wrong");
             }
         });
@@ -91,7 +92,7 @@ const Login = (props) => {
                 <form onSubmit={handleSubmit} noValidate>
                     <div><input type="email" name="email" placeholder="email" onChange={handleChange} /></div>
                     <div><input type="password" name="password" placeholder="password" onChange={handleChange} /></div>
-                    <div className={styles.notification}>{loading ? <img src={loadImg} alt="loading..." /> : !formValid && errorMsg}</div>
+                    <div className={styles.notification}>{loading ? <img src={loadImg} alt="loading..." /> : errorMsg}</div>
                     <button className={styles.button} type="submit">login</button>
                 </form>
             </>}
