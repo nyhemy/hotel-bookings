@@ -25,8 +25,7 @@ const RoomEdit = () => {
 
     useEffect(() => {
         if (sessionStorage.getItem("role") !== "manager") {
-            window.location.reload();
-            history.push("/");
+            history.push("/reservations");
         }
 
         getSimple('/room-types/' + id, setErrorMsg, setLoading)
@@ -76,8 +75,7 @@ const RoomEdit = () => {
         event.preventDefault();
 
         if (sessionStorage.getItem("role") !== "manager") {
-            window.location.reload();
-            history.push("/");
+            history.push("/reservations");
         }
 
         setNameError('');

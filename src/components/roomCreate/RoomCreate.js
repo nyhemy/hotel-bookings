@@ -23,8 +23,7 @@ const RoomCreate = () => {
 
     useEffect (() => {
         if (!sessionStorage.getItem("token") || sessionStorage.getItem("role") !== "manager") {
-            history.push("/");
-            window.location.reload();
+            history.push("/reservations");
         }
 
     }, [history]);
@@ -52,8 +51,7 @@ const RoomCreate = () => {
         event.preventDefault();
 
         if (sessionStorage.getItem("role") !== "manager") {
-            window.location.reload();
-            history.push("/");
+            history.push("/reservations");
         }
 
         setNameError('');

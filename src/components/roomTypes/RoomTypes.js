@@ -16,8 +16,7 @@ const RoomTypes = () => {
 
     useEffect (() => {
         if (!sessionStorage.getItem("token") || sessionStorage.getItem("role") !== "manager") {
-            history.push("/");
-            window.location.reload();
+            history.push("/reservations");
         }
 
         const getRoomTypes = () => {
@@ -53,8 +52,8 @@ const RoomTypes = () => {
         <div className={styles.center}>
             <h2>Rooms</h2>
             {error && <h3 className={styles.error}>Oops something went wrong</h3>}
-            <div className={styles.row}>
-                {loading ?
+            <div className={styles.row}>{loading
+                ?
                     <img src={loadImg} alt="loading..." />
                 :
                     !error && <>
@@ -69,8 +68,7 @@ const RoomTypes = () => {
                             />
                         </div>)}
                     </>
-                }
-            </div>
+            }</div>
         </div>
     );
 }
