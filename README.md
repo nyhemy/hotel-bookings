@@ -48,6 +48,8 @@ Below you will find what steps you need to perform to get the app up and running
 
 4. To test coverage run `npm test -- --coverage`
 
+5. To test the entire project with coverage run `npm test -- --coverage --changedSince=master`
+
 ### Linting
 
 Run `npm run lint`

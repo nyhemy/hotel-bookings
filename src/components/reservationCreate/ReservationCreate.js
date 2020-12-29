@@ -145,7 +145,7 @@ const ReservationCreate = () => {
             </h3>
             <>
                 <form className={styles.form} onSubmit={handleSubmit} noValidate>
-                    <div className={styles.input}><input type='email' name='email' placeholder='email' onChange={handleChange} /></div>
+                    <div className={styles.input}><input type='email' name='email' placeholder='guest email' onChange={handleChange} /></div>
                     <div className={styles.inputError}>{emailError}</div>
                     <div className={styles.input}><input type='text' name='date' placeholder='check-in date' onChange={handleChange} /></div>
                     <div className={styles.inputError}>{dateError}</div>

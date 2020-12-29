@@ -8,8 +8,8 @@
 // });
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import ReactDOM, { unmountComponentAtNode } from 'react-dom';
+import { render } from '@testing-library/react';
+import { unmountComponentAtNode } from 'react-dom';
 import App from './components/app/App';
 import '@testing-library/jest-dom/extend-expect';
 

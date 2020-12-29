@@ -4,7 +4,7 @@ import styles from './RoomTypes.module.css';
 import Room from '../room/Room';
 import Button from '../button/Button';
 import loadImg from '../ajax-loader.gif';
-import { getSimple } from '../Functions';
+import { get } from '../Functions';
 
 /**
  * Component used to display all rooms from backend
@@ -27,15 +27,7 @@ const RoomTypes = () => {
             history.push("/reservations");
         }
 
-        getSimple('/room-types', setErrorMsg, setLoading)
-        .then(response => {
-            setLoading(false);
-            setRooms(response.data);
-        })
-        .catch(error => {
-            setLoading(false);
-            setErrorMsg('Oops something went wrong');
-        });
+        get('/room-types', setErrorMsg, setLoading, setRooms)
 
     }, [history]);
 
