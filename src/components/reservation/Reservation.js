@@ -5,6 +5,11 @@ import Button from '../button/Button';
 import loadImg from '../ajax-loader.gif';
 import { get } from '../Functions';
 
+/**
+ * Reservation card component, used in Reservations. Takes data pulled from API and displays it
+ * 
+ * @param {*} props are props passed when the component is called
+ */
 const Reservation = (props) => {
     const {checkInDate, guestEmail, id, numberOfNights, roomTypeId} = props;
     
@@ -15,29 +20,21 @@ const Reservation = (props) => {
     const [loading, setLoading] = useState(false);
     const [rooms, setRooms] = useState([]);
 
-
+    /**
+     * Pulls all rooms from database a component mount
+     */
     useEffect (() => {
-
-        // const getRoomTypes = () => {
-        //     axios.get('http://localhost:8080/room-types', {
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'mode': 'cors',
-        //             'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-        //         }
-        //     })
-        //     .then(response => {
-        //         setRooms(response.data);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     });
-        // }
 
         get('/room-types', setErrorMsg, setLoading, setRooms);
     }, []);
 
 
+    /**
+     * Takes in a room id and, if it exists, spits out its name
+     * 
+     * @param {number} num is the id of a room
+     * @returns {string} the name of a room
+     */
     const getRoomType = (num) => {
         let r = rooms;
         for (let i = 0; i <= r.length-1; i++) {
@@ -47,6 +44,12 @@ const Reservation = (props) => {
         }
     }
 
+    /**
+     * Gets the cost of a stay depending on a room rate and numberOfNights state
+     * 
+     * @param {number} num is the id of a room
+     * @returns {number} stay cost, aka product of numberOfNights state and rate of room with id of num
+     */
     const getStayCost = (num) => {
         let r = rooms;
         for (let i = 0; i <= r.length-1; i++) {

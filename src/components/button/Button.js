@@ -3,8 +3,8 @@ import styles from './Button.module.css';
 
 /**
  * Button component to be used in various pieces of the app
- * @param {*} props Props passed in whenever Button is called
  * 
+ * @param {*} props Props passed in whenever Button is called
  */
 const Button = (props) => {
 

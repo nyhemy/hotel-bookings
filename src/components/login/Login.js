@@ -3,7 +3,14 @@ import { useHistory } from 'react-router-dom';
 import styles from './Login.module.css';
 import loadImg from '../ajax-loader.gif';
 
+/**
+ * Handles user login, sending email and password to API and handling response
+ * 
+ * @param {*} props Props passed into Login whenever it is called
+ */
 const Login = (props) => {
+
+    // loggedIn and isManager are booleans, and login is a callback for the loggedIn boolean
     const {login, loggedIn, isManager} = props;
 
     const axios = require('axios').default;
@@ -29,6 +36,11 @@ const Login = (props) => {
         }      
     }
 
+    /**
+     * Handles form submission, including validation and API request(s)
+     * 
+     * @param {*} event is the submission event
+     */
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrorMsg('');

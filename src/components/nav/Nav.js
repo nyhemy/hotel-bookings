@@ -2,7 +2,14 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import styles from './Nav.module.css';
 
+/**
+ * The header component, which will always remain onscreen and includes various navlinks that change depending on user role
+ * 
+ * @param {*} props are props passed when component is called
+ */
 const Nav = (props) => {
+    
+    // loggedIn and isManager are booleans
     const {loggedIn, isManager} = props;
 
     return (
