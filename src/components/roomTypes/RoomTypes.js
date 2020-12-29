@@ -4,46 +4,45 @@ import styles from './RoomTypes.module.css';
 import Room from '../room/Room';
 import Button from '../button/Button';
 import loadImg from '../ajax-loader.gif';
+import { getSimple } from '../Functions';
 
+/**
+ * Component used to display all rooms from backend
+ */
 const RoomTypes = () => {
 
-    const axios = require('axios').default;
+    // states used for general component functionality
     const history = useHistory();
-
-    const [rooms, setRooms] = useState([]);
-    const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [rooms, setRooms] = useState([]);
 
+    // state used for error message
+    const [errorMsg, setErrorMsg] = useState('');
+
+    /**
+     * redirects user to Reservations if not logged in and/or a manager, else retrieves all rooms from API
+     */
     useEffect (() => {
         if (!sessionStorage.getItem("token") || sessionStorage.getItem("role") !== "manager") {
             history.push("/reservations");
         }
 
-        const getRoomTypes = () => {
-        setError(false);
-        setLoading(true);
-        axios.get('http://localhost:8080/room-types', 
-        {
-            headers: {
-                'Content-Type': 'application/json',
-                'mode': 'cors',
-                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-            }
-        })
+        getSimple('/room-types', setErrorMsg, setLoading)
         .then(response => {
             setLoading(false);
             setRooms(response.data);
         })
         .catch(error => {
             setLoading(false);
-            setError(true);
+            setErrorMsg('Oops something went wrong');
         });
-    }
 
-        getRoomTypes();
-    }, [axios, history]);
+    }, [history]);
 
 
+    /**
+     * Redirects to CreateRoom endpoint
+     */
     const createRoom = () => {
         history.push('/room-types/create');
     }
@@ -51,12 +50,12 @@ const RoomTypes = () => {
     return (
         <div className={styles.center}>
             <h2>Rooms</h2>
-            {error && <h3 className={styles.error}>Oops something went wrong</h3>}
+            {errorMsg && <h3 className={styles.error}>{errorMsg}</h3>}
             <div className={styles.row}>{loading
                 ?
                     <img src={loadImg} alt="loading..." />
                 :
-                    !error && <>
+                    errorMsg === '' && <>
                         <div><Button onClick={createRoom}>Create</Button></div>
                         {rooms.map((data, index) => <div className={styles.column} key={index}>
                             <Room

@@ -3,22 +3,30 @@ import { useHistory } from 'react-router-dom';
 import styles from './RoomCreate.module.css';
 import loadImg from '../ajax-loader.gif';
 
+/**
+ * Component used for the curation of new Rooms
+ */
 const RoomCreate = () => {
     
+    // states used for general component functionality
     const axios = require('axios').default;
     const history = useHistory();
-
     const [loading, setLoading] = useState(false);
-    const [errorMsg, setErrorMsg] = useState('');
-
+    
+    // states used for form inputs
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [rate, setRate] = useState('');
     const [active, setActive] = useState(false);
 
+    // states used for error handling
+    const [errorMsg, setErrorMsg] = useState('');
     const [nameError, setNameError] = useState('');
     const [rateError, setRateError] = useState('');
 
+    /**
+     * If user is not logged in and/or a manager redirects to Reservations
+     */
     useEffect (() => {
         if (!sessionStorage.getItem("token") || sessionStorage.getItem("role") !== "manager") {
             history.push("/reservations");
@@ -26,6 +34,11 @@ const RoomCreate = () => {
 
     }, [history]);
 
+    /**
+     * Handles changes in input
+     * 
+     * @param {event} event is whenever input value changes
+     */
     const handleChange = (event) => {
         switch (event.target.name) {
             case "name":
@@ -45,6 +58,11 @@ const RoomCreate = () => {
         }
     }
     
+    /**
+     * Handles form submission, including validation and API calls
+     * 
+     * @param {event} event is the form submission event
+     */
     const handleSubmit = (event) => {
         event.preventDefault();
 

@@ -4,27 +4,38 @@ import { getSimple } from '../Functions';
 import styles from './RoomEdit.module.css';
 import loadImg from '../ajax-loader.gif';
 
+/**
+ * Component which handles modification of existing Rooms
+ */
 const RoomEdit = () => {
 
+    // states used for general component functionality
     const axios = require('axios').default;
+    const [loading, setLoading] = useState(false);
     const history = useHistory();
+
+    // state for id taken from URL
     let { id } = useParams();
 
-    const [errorMsg, setErrorMsg] = useState(false);
-    const [loading, setLoading] = useState(false);
+    // state representing whether room with id given exists
+    const [notFound, setNotFound] = useState(false);
 
+    // states used for form input
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [rate, setRate] = useState('');
     const [active, setActive] = useState(false);
 
+    // states used for error handling
+    const [errorMsg, setErrorMsg] = useState(false);
     const [nameError, setNameError] = useState('');
     const [rateError, setRateError] = useState('');
 
-    const [notFound, setNotFound] = useState(false);
-
+    /**
+     * redirects user to Reservations if not logged in and/or is not a manager, else requests all rooms from API backend
+     */
     useEffect(() => {
-        if (sessionStorage.getItem("role") !== "manager") {
+        if (!sessionStorage.getItem("token") || sessionStorage.getItem("role") !== "manager") {
             history.push("/reservations");
         }
 
@@ -52,6 +63,11 @@ const RoomEdit = () => {
 
     }, [history, id])
 
+    /**
+     * handles changes to input
+     * 
+     * @param {event} event is whenever the value of an input changes
+     */
     const handleChange = (event) => {
         switch (event.target.name) {
             case "name":
@@ -71,6 +87,11 @@ const RoomEdit = () => {
         }
     }
 
+    /**
+     * Handles form submission as well as validation and calls to API
+     * 
+     * @param {event} event is the form submission event
+     */
     const handleSubmit = (event) => {
         event.preventDefault();
 
