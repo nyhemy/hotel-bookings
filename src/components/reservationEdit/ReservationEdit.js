@@ -100,7 +100,9 @@ const ReservationEdit = () => {
             noValidate = true;
         }
 
-        if (parseInt(numNights) <= 0 || numNights === '') {
+        let num = Number(numNights);
+
+        if (num <= 0 || numNights === '' || !Number.isInteger(num) ) {
             setNumNightsError('Must be number greater than zero');
             noValidate = true;
         }
