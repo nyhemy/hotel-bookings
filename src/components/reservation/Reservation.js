@@ -7,18 +7,21 @@ import { get } from '../Functions';
 
 /**
  * Reservation card component, used in Reservations. Takes data pulled from API and displays it
+ * Contains Edit and Delete buttons as well
  * 
  * @param {*} props are props passed when the component is called
  */
 const Reservation = (props) => {
     const {checkInDate, guestEmail, id, numberOfNights, roomTypeId} = props;
     
+    // states used for general component functionality
     const axios = require('axios').default;
     const history = useHistory();
-
-    const [errorMsg, setErrorMsg] = useState('test');
     const [loading, setLoading] = useState(false);
     const [rooms, setRooms] = useState([]);
+
+    // error messages state
+    const [errorMsg, setErrorMsg] = useState('test');
 
     /**
      * Pulls all rooms from database a component mount
@@ -60,6 +63,9 @@ const Reservation = (props) => {
         }
     }
 
+    /**
+     * Handles delete request for Reservation to API
+     */
     const deleteReservation = () => {
         setLoading(true);
         axios.delete('http://localhost:8080/reservations/' + id, {
@@ -82,6 +88,9 @@ const Reservation = (props) => {
         });
     }
 
+    /**
+     * Navigates to ReservationsEdit endpoint
+     */
     const editReservation = () => {
         history.push('/reservations/edit/' + id)
     }

@@ -13,15 +13,23 @@ const Login = (props) => {
     // loggedIn and isManager are booleans, and login is a callback for the loggedIn boolean
     const {login, loggedIn, isManager} = props;
 
+    // states used for general component functionality
     const axios = require('axios').default;
     const history = useHistory();
+    const [loading, setLoading] = useState(false);
 
+    // form states
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    // errorMsg state
     const [errorMsg, setErrorMsg] = useState("");
-    const [loading, setLoading] = useState(false);
     
+    /**
+     * Handles what happens when input is changed
+     * 
+     * @param {event} event is when input changes its value
+     */
     const handleChange = (event) => {
         event.preventDefault();
         switch (event.target.name) {
@@ -39,7 +47,7 @@ const Login = (props) => {
     /**
      * Handles form submission, including validation and API request(s)
      * 
-     * @param {*} event is the submission event
+     * @param {event} event is the submission event
      */
     const handleSubmit = (event) => {
         event.preventDefault();

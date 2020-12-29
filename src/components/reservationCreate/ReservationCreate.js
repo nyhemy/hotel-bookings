@@ -4,15 +4,16 @@ import styles from './ReservationCreate.module.css';
 import loadImg from '../ajax-loader.gif';
 import { get } from '../Functions';
 
+/**
+ * Component containing form for curation of new Reservation
+ */
 const ReservationCreate = () => {
 
+    // states used for general component functionality
     const axios = require('axios').default;
     const history = useHistory();
-
-    // states used for component functionality
     const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [errorMsg, setErrorMsg] = useState('');
 
     // states for form input
     const [email, setEmail] = useState('');
@@ -21,11 +22,15 @@ const ReservationCreate = () => {
     const [room, setRoom] = useState('');
 
     // states for error messages
+    const [errorMsg, setErrorMsg] = useState('');
     const [emailError, setEmailError] = useState('');
     const [dateError, setDateError] = useState('');
     const [numNightError, setNumNightsError] = useState('');
     const [roomError, setRoomError] = useState('');
 
+    /**
+     * Checks if user is logged in, else redirect to login, and makes call to API to get all rooms
+     */
     useEffect(() => {
         if (!sessionStorage.getItem("token")) {
             history.push("/");
@@ -34,6 +39,11 @@ const ReservationCreate = () => {
         get('/room-types', setErrorMsg, setLoading, setRooms);
     }, [history]);
 
+    /**
+     * Handles changes to input
+     * 
+     * @param {event} event is when the value of an input is changed
+     */
     const handleChange = (event) => {
         event.preventDefault();
         switch (event.target.name) {
@@ -54,6 +64,11 @@ const ReservationCreate = () => {
         }      
     }
 
+    /**
+     * Handles form submission, including validation and API calls
+     * 
+     * @param {event} event is the form submission event
+     */
     const handleSubmit = (event) => {
         event.preventDefault();
         setEmailError('');
