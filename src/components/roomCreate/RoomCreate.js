@@ -17,9 +17,7 @@ const RoomCreate = () => {
     const [active, setActive] = useState(false);
 
     const [nameError, setNameError] = useState('');
-    // const [descriptionError, setDescriptionError] = useState('');
     const [rateError, setRateError] = useState('');
-    // const [activeError, setActiveError] = useState('');
 
     useEffect (() => {
         if (!sessionStorage.getItem("token") || sessionStorage.getItem("role") !== "manager") {
@@ -55,9 +53,7 @@ const RoomCreate = () => {
         }
 
         setNameError('');
-        // setDescriptionError('');
         setRateError('');
-        // setActiveError('');
 
         let noValidate = false;
 

@@ -12,6 +12,8 @@ import { get } from '../Functions';
  * @param {*} props are props passed when the component is called
  */
 const Reservation = (props) => {
+
+    // All props are values passed in from Reservations component mapping which are pulled from backend
     const {checkInDate, guestEmail, id, numberOfNights, roomTypeId} = props;
     
     // states used for general component functionality

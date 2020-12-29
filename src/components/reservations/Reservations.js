@@ -6,14 +6,22 @@ import Button from '../button/Button';
 import loadImg from '../ajax-loader.gif';
 import { get } from '../Functions';
 
+/**
+ * Component which displays a series of Reservations, as well as providing links to edit and create new ones
+ */
 const Reservations = () => {
 
+    // states used for general component functionality
     const history = useHistory();
-
-    const [reservations, setReservations] = useState([]);
-    const [error, setErrorMsg] = useState('');
     const [loading, setLoading] = useState(false);
+    const [error, setErrorMsg] = useState('');
+
+    // state which contains Reservations returned from API
+    const [reservations, setReservations] = useState([]);
     
+    /**
+     * Redirects user to Login if not logged in, otherwise requests all reservations from API
+     */
     useEffect(() => {
         if (!sessionStorage.getItem("token")) {
             history.push("/");
@@ -22,27 +30,9 @@ const Reservations = () => {
         get('/reservations', setErrorMsg, setLoading, setReservations);
     }, [history]);
 
-    // fetches reservations from API and sets them to reservations state
-    // const getReservations = () => {
-    //     setErrorMsg('');
-    //     setLoading(true);
-    //     axios.get('http://localhost:8080/reservations', {
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'mode': 'cors',
-    //             'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-    //         }
-    //     })
-    //     .then(response => {
-    //         setLoading(false);
-    //         setReservations(response.data);
-    //     })
-    //     .catch(error => {
-    //         setLoading(false);
-    //         setErrorMsg('Oops something went wrong');
-    //     });
-    // }
-
+    /**
+     * Redirects to CreateReservation endpoint
+     */
     const createReservation = () => {
         history.push("/reservations/create")
     }

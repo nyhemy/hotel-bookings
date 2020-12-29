@@ -4,28 +4,40 @@ import { get, getSimple } from '../Functions';
 import loadImg from '../ajax-loader.gif';
 import styles from './ReservationEdit.module.css';
 
+/**
+ * Component containing a form which handles the modification of existing Reservations
+ */
 const ReservationEdit = () => {
 
+    // states used for general component functionality
     const axios = require('axios').default;
     const history = useHistory();
+    const [rooms, setRooms] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    // id of Reservation pulled from URL
     let { id } = useParams();
 
+    // Boolean representing if Reservation exists
+    const [notFound, setNotFound] = useState(false);
+
+    // states for form inputs
     const [email, setEmail] = useState('');
     const [date, setDate] = useState('');
     const [numNights, setNumNights] = useState(0);
     const [room, setRoom] = useState('');
 
+    // states for error handling
     const [errorMsg, setErrorMsg] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [rooms, setRooms] = useState([]);
-
     const [emailError, setEmailError] = useState('');
     const [dateError, setDateError] = useState('');
     const [numNightError, setNumNightsError] = useState('');
     const [roomError, setRoomError] = useState('');
-
-    const [notFound, setNotFound] = useState(false);
     
+    /**
+     * Redirects user to login in not logged in, otherwise makes a request to backend for Reservation with id provided
+     * Also retrieves all rooms from API
+     */
     useEffect(() => {
         if (!sessionStorage.getItem("token")) {
             history.push("/");
@@ -56,6 +68,11 @@ const ReservationEdit = () => {
         get('/room-types', setErrorMsg, setLoading, setRooms);
     }, [history, id]);
 
+    /**
+     * Handles changes to inputs
+     * 
+     * @param {event} event is when input changes its value
+     */
     const handleChange = (event) => {
         event.preventDefault();
         switch (event.target.name) {
@@ -76,6 +93,11 @@ const ReservationEdit = () => {
         }  
     }
 
+    /**
+     * Handles form submission event, including validation and API calls
+     * 
+     * @param {event} event is the form submission event
+     */
     const handleSubmit = (event) => {
         event.preventDefault();
         setEmailError('');
