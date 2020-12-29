@@ -10,6 +10,7 @@ const Logout = (props) => {
 
     // logout is a callback for a boolean
     const {logout} = props;
+    
     sessionStorage.clear();
     useEffect(() => {
         logout(false);
