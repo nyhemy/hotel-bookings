@@ -43,6 +43,10 @@ const ReservationEdit = () => {
             history.push("/");
         }
 
+        if (isNaN(Number(id))) {
+            setNotFound(true);
+        }
+
         getSimple('/reservations/' + id, setErrorMsg, setLoading)
         .then(response => {
             let res = response.data;
@@ -56,12 +60,14 @@ const ReservationEdit = () => {
         .catch(error => {
             setLoading(false);
 
-            if (error.response.status === 404) {
-                setNotFound(true);
-                setErrorMsg('404 Not Found');
+            if(error.response) {
+                if (error.response.status === 404) {
+                    setNotFound(true);
+                    setErrorMsg('404 Not Found');
+                } else {
+                    isNaN(Number(id)) ? setErrorMsg('404 Not Found') : setErrorMsg("Oops something went wrong");
+                }
             } else if (error.request) {
-                    setErrorMsg("Oops something went wrong");
-            } else if(error.response) {
                 setErrorMsg("Oops something went wrong");
             }
         });
