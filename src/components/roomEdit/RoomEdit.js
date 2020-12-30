@@ -39,6 +39,10 @@ const RoomEdit = () => {
             history.push("/reservations");
         }
 
+        if (isNaN(Number(id))) {
+            setNotFound(true);
+        }
+
         getSimple('/room-types/' + id, setErrorMsg, setLoading)
         .then(response => {
             let res = response.data;
@@ -52,12 +56,14 @@ const RoomEdit = () => {
         .catch(error => {
             setLoading(false);
             
-            if (error.response.status === 404) {
-                setNotFound(true);
-                setErrorMsg('404 Not Found');
+            if(error.response) {
+                if (error.response.status === 404) {
+                    setNotFound(true);
+                    setErrorMsg('404 Not Found');
+                } else {
+                    isNaN(Number(id)) ? setErrorMsg('404 Not Found') : setErrorMsg("Oops something went wrong");
+                }
             } else if (error.request) {
-                    setErrorMsg("Oops something went wrong");
-            } else if(error.response) {
                 setErrorMsg("Oops something went wrong");
             }
         });
