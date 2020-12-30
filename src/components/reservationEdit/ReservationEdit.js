@@ -55,11 +55,12 @@ const ReservationEdit = () => {
         })
         .catch(error => {
             setLoading(false);
-            if (error.request) {
-                setErrorMsg("Oops something went wrong");
-            } else if (error.response.status === 404) {
+
+            if (error.response.status === 404) {
                 setNotFound(true);
                 setErrorMsg('404 Not Found');
+            } else if (error.request) {
+                    setErrorMsg("Oops something went wrong");
             } else if(error.response) {
                 setErrorMsg("Oops something went wrong");
             }
@@ -129,7 +130,15 @@ const ReservationEdit = () => {
             noValidate = true;
         }
 
-        if (room === '') {
+        let loopId = null;
+
+        for (let r of rooms) {
+            if (r.id === Number(room)) {
+                loopId = r.id;
+            }
+        }
+
+        if (loopId === null) {
             setRoomError('Must select a room type');
             noValidate = true;
         }
@@ -187,6 +196,7 @@ const ReservationEdit = () => {
                 <div>Room</div>
                 <div>
                     <select className={styles.select} value={room} name={'room'} onChange={handleChange}>
+                    <option value='test'>test</option>
                         {rooms.map((data, index) => {
                             if (data.active) {
                                  return <option value={data.id} key={index}>{data.name}</option>

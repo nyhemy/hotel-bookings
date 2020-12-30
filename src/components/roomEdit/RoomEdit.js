@@ -51,11 +51,12 @@ const RoomEdit = () => {
         })
         .catch(error => {
             setLoading(false);
-            if (error.request) {
-                setErrorMsg("Oops something went wrong");
-            } else if (error.response.status === 404) {
+            
+            if (error.response.status === 404) {
                 setNotFound(true);
                 setErrorMsg('404 Not Found');
+            } else if (error.request) {
+                    setErrorMsg("Oops something went wrong");
             } else if(error.response) {
                 setErrorMsg("Oops something went wrong");
             }

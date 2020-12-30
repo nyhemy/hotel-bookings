@@ -99,7 +99,7 @@ const Login = (props) => {
 
     return (
         <div className={styles.container}>
-            {loggedIn && <>
+            {loggedIn && sessionStorage.getItem("token") && <>
                 <h3>{"Welcome to Hotel Bookings " + JSON.parse(atob(sessionStorage.getItem("token").split('.')[1])).sub}</h3>
             </>}
 

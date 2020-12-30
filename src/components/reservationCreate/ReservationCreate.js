@@ -100,7 +100,15 @@ const ReservationCreate = () => {
             noValidate = true;
         }
 
-        if (room === '') {
+        let loopId = null;
+
+        for (let r of rooms) {
+            if (r.id === Number(room)) {
+                loopId = r.id;
+            }
+        }
+
+        if (loopId === null) {
             setRoomError('Must select a room type');
             noValidate = true;
         }
@@ -153,7 +161,7 @@ const ReservationCreate = () => {
                     <div className={styles.inputError}>{numNightError}</div>
                     <div className={styles.divider}>
                         <select defaultValue={'DEFAULT'} className={styles.select} name='room' onChange={handleChange}>
-                            <option value='DEFAULT' disabled>--select room--</option>
+                            <option value='DEFAULT' >--select room--</option>
                             {rooms.map((data, index) => {
                                 if (data.active) {
                                     return <option value={data.id} key={index}>{data.name}</option>
