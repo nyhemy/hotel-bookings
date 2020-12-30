@@ -196,7 +196,6 @@ const ReservationEdit = () => {
                 <div>Room</div>
                 <div>
                     <select className={styles.select} value={room} name={'room'} onChange={handleChange}>
-                    <option value='test'>test</option>
                         {rooms.map((data, index) => {
                             if (data.active) {
                                  return <option value={data.id} key={index}>{data.name}</option>
