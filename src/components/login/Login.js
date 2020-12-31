@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './Login.module.css';
 import loadImg from '../ajax-loader.gif';
@@ -25,6 +25,12 @@ const Login = (props) => {
     // errorMsg state
     const [errorMsg, setErrorMsg] = useState("");
     
+    useEffect(() => {
+        if (loggedIn && !sessionStorage.getItem('token')) {
+            window.location.reload();
+        }
+    }, [loggedIn]);
+
     /**
      * Handles what happens when input is changed
      * 
@@ -99,8 +105,8 @@ const Login = (props) => {
 
     return (
         <div className={styles.container}>
-            {loggedIn && sessionStorage.getItem("token") && <>
-                <h3>{"Welcome to Hotel Bookings " + JSON.parse(atob(sessionStorage.getItem("token").split('.')[1])).sub}</h3>
+            {loggedIn && <>
+                <h3>Welcome to Hotel Bookings</h3>
             </>}
 
             {!loggedIn && <>
