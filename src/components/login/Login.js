@@ -25,6 +25,9 @@ const Login = (props) => {
     // errorMsg state
     const [errorMsg, setErrorMsg] = useState("");
     
+    /**
+     * Reloads the page if not logged in, this is so when you get a redirect if the token is not detected
+     */
     useEffect(() => {
         if (loggedIn && !sessionStorage.getItem('token')) {
             window.location.reload();
