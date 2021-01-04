@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app component matches snapshot 1`] = `
+Array [
+  <nav
+    className="nav"
+  >
+    <h3>
+      Hotel Bookings
+    </h3>
+  </nav>,
+  <div
+    className="container"
+  >
+    <form
+      noValidate={true}
+      onSubmit={[Function]}
+    >
+      <div
+        className="notification"
+      >
+        
+      </div>
+      <br />
+      <div>
+        <input
+          name="email"
+          onChange={[Function]}
+          placeholder="email"
+          type="email"
+        />
+      </div>
+      <div>
+        <input
+          name="password"
+          onChange={[Function]}
+          placeholder="password"
+          type="password"
+        />
+      </div>
+      <button
+        className="button"
+        type="submit"
+      >
+        login
+      </button>
+    </form>
+  </div>,
+]
+`;

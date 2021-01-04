@@ -6,7 +6,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 
-it('renders w/o crashing', () => {
+test('renders w/o crashing', () => {
     const history = createMemoryHistory();
     render(
         <Router history={history}>

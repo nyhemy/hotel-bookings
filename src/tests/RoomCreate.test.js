@@ -5,12 +5,14 @@ import RoomCreate from '../components/roomCreate/RoomCreate';
 import '@testing-library/jest-dom/extend-expect';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
+import 'react-test-renderer';
 
-it('renders w/o crashing', () => {
+test('renders w/o crashing', () => {
     const history = createMemoryHistory();
+
     render(
         <Router history={history}>
             <RoomCreate />
-        </Router>
+        </Router>,
     );
 });
