@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app component matches snapshot 1`] = `
+<div
+  className="container"
+>
+  <h2>
+    Create Room
+  </h2>
+  <h3
+    className="error"
+  >
+    
+  </h3>
+  <form
+    className="form"
+    noValidate={true}
+    onSubmit={[Function]}
+  >
+    <div>
+      <input
+        className="input"
+        name="name"
+        onChange={[Function]}
+        placeholder="room name"
+        type="text"
+      />
+    </div>
+    <div
+      className="inputError"
+    >
+      
+    </div>
+    <div>
+      <input
+        className="input"
+        name="description"
+        onChange={[Function]}
+        placeholder="room description"
+        type="textarea"
+      />
+    </div>
+    <div
+      className="inputError"
+    />
+    <div>
+      <input
+        className="input"
+        name="rate"
+        onChange={[Function]}
+        placeholder="room rate"
+        type="number"
+      />
+    </div>
+    <div
+      className="inputError"
+    >
+      
+    </div>
+    <div
+      className="divider"
+    >
+      <input
+        checked={false}
+        className="checkbox"
+        name="active"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        className="checkboxLabel"
+      >
+        Active
+      </label>
+      <button
+        className="button"
+        type="submit"
+      >
+        Create
+      </button>
+    </div>
+  </form>
+</div>
+`;
